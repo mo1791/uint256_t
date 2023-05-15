@@ -514,7 +514,7 @@ public:
     template <std::integral T>
     bool uint128_t::operator==(const T &rhs) const
     {
-        return ( !m_upper && ( m_lower == (uint64_t)rhs ) );
+        return ( not m_upper && ( m_lower == (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
@@ -532,7 +532,7 @@ public:
     template <std::integral T>
     bool uint128_t::operator<(const T &rhs) const
     {
-        return ( !m_upper ) ? ( m_lower < (uint64_t)rhs ) : false;
+        return ( not m_upper ) ? ( m_lower < (uint64_t)rhs ) : false;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
@@ -758,7 +758,7 @@ public:
     template <std::integral T>
     bool operator==(const T &lhs, const uint128_t &rhs)
     {
-        return (!rhs.upper() && ((uint64_t)lhs == rhs.lower()));
+        return ( not rhs.upper() && ((uint64_t)lhs == rhs.lower()));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
@@ -770,7 +770,7 @@ public:
     template <std::integral T>
     bool operator>(const T &lhs, const uint128_t &rhs)
     {
-        return (!rhs.upper()) && ((uint64_t)lhs > rhs.lower());
+        return (not rhs.upper()) && ((uint64_t)lhs > rhs.lower());
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>

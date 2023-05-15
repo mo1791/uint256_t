@@ -476,6 +476,7 @@
     {
         m_upper = uint128_0;
         m_lower = rhs;
+
         return *this;
     }
 //  ----------------------------------------------------------------------------
@@ -604,6 +605,7 @@
     uint256_t &uint256_t::operator<<=(const T &rhs)
     {
         *this = *this << uint256_t(rhs);
+
         return *this;
     }
 //  ----------------------------------------------------------------------------
@@ -655,6 +657,7 @@
     T &operator<<=(T &lhs, const uint256_t &rhs)
     {
         lhs = static_cast<T>(uint256_t(lhs) << rhs);
+
         return lhs;
     }
 //  ----------------------------------------------------------------------------
@@ -698,7 +701,7 @@
     template <std::integral T>
     bool uint256_t::operator==(const T &rhs) const
     {
-        return (!m_upper && (m_lower == uint128_t(rhs)));
+        return (not m_upper && (m_lower == uint128_t(rhs)));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
@@ -716,7 +719,7 @@
     template <std::integral T>
     bool uint256_t::operator<(const T &rhs) const
     {
-        return (!m_upper) ? (m_lower < uint128_t(rhs)) : false;
+        return (not m_upper) ? (m_lower < uint128_t(rhs)) : false;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
@@ -743,7 +746,7 @@
     template <std::integral T>
     bool operator==(const T &lhs, const uint256_t &rhs)
     {
-        return (!rhs.upper() && ((uint64_t)lhs == rhs.lower()));
+        return (not rhs.upper() && ((uint64_t)lhs == rhs.lower()));
     }
 //  ----------------------------------------------------------------------------
     bool operator!=(const uint128_t &lhs, const uint256_t &rhs);
@@ -888,6 +891,7 @@
     T &operator+=(T &lhs, const uint256_t &rhs)
     {
         lhs = static_cast<T>(rhs + lhs);
+        
         return lhs;
     }
 //  ----------------------------------------------------------------------------
