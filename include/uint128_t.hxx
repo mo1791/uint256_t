@@ -55,33 +55,33 @@ public:
     // Constructors
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint128_t();
+    uint128_t() noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t(const uint128_t &rhs);
+    uint128_t(const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t(uint128_t &&rhs);
+    uint128_t(uint128_t &&rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t(const T &rhs);
+    uint128_t(const T &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral S, std::integral T>
-    uint128_t(const S &upper_rhs, const T &lower_rhs);
+    uint128_t(const S &upper_rhs, const T &lower_rhs) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
 
 
 //  ----------------------------------------------------------------------------
-    //  RHS input args only
+    // RHS input args only
     // Assignment Operator
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint128_t &operator=(const uint128_t &rhs);
+    uint128_t &operator=(const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator=(uint128_t &&rhs);
+    uint128_t &operator=(uint128_t &&rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t &operator=(const T &rhs);
+    uint128_t &operator=(const T &rhs) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -90,15 +90,15 @@ public:
     // Typecast Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    operator bool() const;
+    operator bool()     const noexcept;
 //  ----------------------------------------------------------------------------
-    operator uint8_t() const;
+    operator uint8_t()  const noexcept;
 //  ----------------------------------------------------------------------------
-    operator uint16_t() const;
+    operator uint16_t() const noexcept;
 //  ----------------------------------------------------------------------------
-    operator uint32_t() const;
+    operator uint32_t() const noexcept;
 //  ----------------------------------------------------------------------------
-    operator uint64_t() const;
+    operator uint64_t() const noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -106,37 +106,37 @@ public:
 //  ----------------------------------------------------------------------------
     // Bitwise Operators
 //  ----------------------------------------------------------------------------
-    uint128_t operator&(const uint128_t &rhs) const;
+    uint128_t operator&(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator&(const T &rhs) const;
+    uint128_t operator&(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator&=(const uint128_t &rhs);
-//  ----------------------------------------------------------------------------
-    template <std::integral T>
-    uint128_t &operator&=(const T &rhs);
-//  ----------------------------------------------------------------------------
-    uint128_t operator|(const uint128_t &rhs) const;
+    uint128_t &operator&=(const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator|(const T &rhs) const;
+    uint128_t &operator&=(const T &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator|=(const uint128_t &rhs);
-//  ----------------------------------------------------------------------------
-    template <std::integral T>
-    uint128_t &operator|=(const T &rhs);
-//  ----------------------------------------------------------------------------
-    uint128_t operator^(const uint128_t &rhs) const;
+    uint128_t operator|(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator^(const T &rhs) const;
+    uint128_t operator|(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator^=(const uint128_t &rhs);
+    uint128_t &operator|=(const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t &operator^=(const T &rhs);
+    uint128_t &operator|=(const T &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator~() const;
+    uint128_t operator^(const uint128_t &rhs) const noexcept;
+//  ----------------------------------------------------------------------------
+    template <std::integral T>
+    uint128_t operator^(const T &rhs) const noexcept;
+//  ----------------------------------------------------------------------------
+    uint128_t &operator^=(const uint128_t &rhs) noexcept;
+//  ----------------------------------------------------------------------------
+    template <std::integral T>
+    uint128_t &operator^=(const T &rhs) noexcept;
+//  ----------------------------------------------------------------------------
+    uint128_t operator~() const noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -145,25 +145,25 @@ public:
     // Bit Shift Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const uint128_t &rhs) const;
+    uint128_t operator<<(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator<<(const T &rhs) const;
+    uint128_t operator<<(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator<<=(const uint128_t &rhs);
+    uint128_t &operator<<=(const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
     uint128_t &operator<<=(const T &rhs);
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const uint128_t &rhs) const;
+    uint128_t operator>>(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator>>(const T &rhs) const;
+    uint128_t operator>>(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator>>=(const uint128_t &rhs);
+    uint128_t &operator>>=(const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t &operator>>=(const T &rhs);
+    uint128_t &operator>>=(const T &rhs) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -172,17 +172,17 @@ public:
     // Logical Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    bool operator!() const;
+    bool operator!() const noexcept;
 //  ----------------------------------------------------------------------------
-    bool operator&&(const uint128_t &rhs) const;
+    bool operator&&(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
-    bool operator||(const uint128_t &rhs) const;
-//  ----------------------------------------------------------------------------
-    template <std::integral T>
-    bool operator&&(const T &rhs);
+    bool operator||(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator||(const T &rhs);
+    bool operator&&(const T &rhs) noexcept;
+//  ----------------------------------------------------------------------------
+    template <std::integral T>
+    bool operator||(const T &rhs) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -191,35 +191,35 @@ public:
     // Comparison Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    bool operator==(const uint128_t &rhs) const;
+    bool operator==(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator==(const T &rhs) const;
+    bool operator==(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
-    bool operator!=(const uint128_t &rhs) const;
-//  ----------------------------------------------------------------------------
-    template <std::integral T>
-    bool operator!=(const T &rhs) const;
-//  ----------------------------------------------------------------------------
-    bool operator>(const uint128_t &rhs) const;
+    bool operator!=(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator>(const T &rhs) const;
+    bool operator!=(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
-    bool operator<(const uint128_t &rhs) const;
-//  ----------------------------------------------------------------------------
-    template <std::integral T>
-    bool operator<(const T &rhs) const;
-//  ----------------------------------------------------------------------------
-    bool operator>=(const uint128_t &rhs) const;
+    bool operator>(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator>=(const T &rhs) const;
+    bool operator>(const T &rhs) const noexcept;
+//  ----------------------------------------------------------------------------
+    bool operator<(const uint128_t &rhs) const noexcept;
+//  ----------------------------------------------------------------------------
+    template <std::integral T>
+    bool operator<(const T &rhs) const noexcept;
+//  ----------------------------------------------------------------------------
+    bool operator>=(const uint128_t &rhs) const noexcept;
+//  ----------------------------------------------------------------------------
+    template <std::integral T>
+    bool operator>=(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     bool operator<=(const uint128_t &rhs) const;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator<=(const T &rhs) const;
+    bool operator<=(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -228,35 +228,35 @@ public:
     // Arithmetic Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint128_t operator+(const uint128_t &rhs) const;
+    uint128_t operator+(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator+(const T &rhs) const;
+    uint128_t operator+(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator+=(const uint128_t &rhs);
-//  ----------------------------------------------------------------------------
-    template <std::integral T>
-    uint128_t &operator+=(const T &rhs);
-//  ----------------------------------------------------------------------------
-    uint128_t operator-(const uint128_t &rhs) const;
+    uint128_t &operator+=(const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator-(const T &rhs) const;
+    uint128_t &operator+=(const T &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator-=(const uint128_t &rhs);
-//  ----------------------------------------------------------------------------
-    template <std::integral T>
-    uint128_t &operator-=(const T &rhs);
-//  ----------------------------------------------------------------------------
-    uint128_t operator*(const uint128_t &rhs) const;
+    uint128_t operator-(const uint128_t &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator*(const T &rhs) const;
+    uint128_t operator-(const T &rhs) const noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator*=(const uint128_t &rhs);
+    uint128_t &operator-=(const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t &operator*=(const T &rhs);
+    uint128_t &operator-=(const T &rhs) noexcept;
+//  ----------------------------------------------------------------------------
+    uint128_t operator*(const uint128_t &rhs) const noexcept;
+//  ----------------------------------------------------------------------------
+    template <std::integral T>
+    uint128_t operator*(const T &rhs) const noexcept;
+//  ----------------------------------------------------------------------------
+    uint128_t &operator*=(const uint128_t &rhs) noexcept;
+//  ----------------------------------------------------------------------------
+    template <std::integral T>
+    uint128_t &operator*=(const T &rhs) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -299,9 +299,9 @@ public:
     // Increment Operator
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint128_t &operator++();
+    uint128_t &operator++() noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator++(int);
+    uint128_t operator++(int) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -310,19 +310,19 @@ public:
     // Decrement Operator
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint128_t &operator--();
+    uint128_t &operator--() noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator--(int);
+    uint128_t operator--(int) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     // Nothing done since promotion doesn't work here
-    uint128_t operator+() const;
+    uint128_t operator+() const noexcept;
 //  ----------------------------------------------------------------------------
     // two's complement
-    uint128_t operator-() const;
+    uint128_t operator-() const noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -331,9 +331,9 @@ public:
     // Get private values
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    const uint64_t &upper() const;
+    const uint64_t &upper() const noexcept;
 //  ----------------------------------------------------------------------------
-    const uint64_t &lower() const;
+    const uint64_t &lower() const noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -342,7 +342,7 @@ public:
     // Get bitsize of value
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint8_t bits() const;
+    uint8_t bits() const noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -370,13 +370,13 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t::uint128_t(const T &rhs) 
+    uint128_t::uint128_t(const T &rhs) noexcept
         : m_upper(0)
         , m_lower(rhs)
     {}
 //  ----------------------------------------------------------------------------
     template <std::integral S, std::integral T>
-    uint128_t::uint128_t(const S &up_rhs, const T &lo_rhs)
+    uint128_t::uint128_t(const S &up_rhs, const T &lo_rhs) noexcept
         : m_upper(up_rhs)
         , m_lower(lo_rhs)
     {}
@@ -389,7 +389,7 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t& uint128_t::operator=(const T &rhs)
+    uint128_t& uint128_t::operator=(const T &rhs) noexcept
     {
         m_upper = 0;
         m_lower = rhs;
@@ -405,13 +405,13 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t uint128_t::operator&(const T &rhs) const
+    uint128_t uint128_t::operator&(const T &rhs) const noexcept
     {
         return uint128_t(0, m_lower & (uint64_t)rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t& uint128_t::operator&=(const T &rhs)
+    uint128_t& uint128_t::operator&=(const T &rhs) noexcept
     {
         m_upper  = 0;
         m_lower &= rhs;
@@ -420,13 +420,13 @@ public:
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t uint128_t::operator|(const T &rhs) const
+    uint128_t uint128_t::operator|(const T &rhs) const noexcept
     {
         return uint128_t( m_upper, ( m_lower | (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t& uint128_t::operator|=(const T &rhs)
+    uint128_t& uint128_t::operator|=(const T &rhs) noexcept
     {
         m_lower |= (uint64_t)rhs;
 
@@ -434,13 +434,13 @@ public:
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t uint128_t::operator^(const T &rhs) const
+    uint128_t uint128_t::operator^(const T &rhs) const noexcept
     {
         return uint128_t( m_upper, ( m_lower ^ (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t& uint128_t::operator^=(const T &rhs)
+    uint128_t& uint128_t::operator^=(const T &rhs) noexcept
     {
         m_lower ^= (uint64_t)rhs;
 
@@ -456,13 +456,13 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t uint128_t::operator<<(const T &rhs) const
+    uint128_t uint128_t::operator<<(const T &rhs) const noexcept
     {
         return *this << uint128_t(rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t& uint128_t::operator<<=(const T &rhs)
+    uint128_t& uint128_t::operator<<=(const T &rhs) noexcept
     {
         *this = *this << uint128_t(rhs);
 
@@ -470,13 +470,13 @@ public:
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t uint128_t::operator>>(const T &rhs) const
+    uint128_t uint128_t::operator>>(const T &rhs) const noexcept
     {
         return *this >> uint128_t(rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t& uint128_t::operator>>=(const T &rhs)
+    uint128_t& uint128_t::operator>>=(const T &rhs) noexcept
     {
         *this = *this >> uint128_t(rhs);
 
@@ -492,13 +492,13 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint128_t::operator&&(const T &rhs)
+    bool uint128_t::operator&&(const T &rhs) noexcept
     {
         return static_cast<bool>(*this && rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint128_t::operator||(const T &rhs)
+    bool uint128_t::operator||(const T &rhs) noexcept
     {
         return static_cast<bool>(*this || rhs);
     }
@@ -512,37 +512,37 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint128_t::operator==(const T &rhs) const
+    bool uint128_t::operator==(const T &rhs) const noexcept
     {
         return ( not m_upper && ( m_lower == (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint128_t::operator!=(const T &rhs) const
+    bool uint128_t::operator!=(const T &rhs) const noexcept
     {
         return ( m_upper | ( m_lower != (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint128_t::operator>(const T &rhs) const
+    bool uint128_t::operator>(const T &rhs) const noexcept
     {
         return ( m_upper || ( m_lower > (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint128_t::operator<(const T &rhs) const
+    bool uint128_t::operator<(const T &rhs) const noexcept
     {
         return ( not m_upper ) ? ( m_lower < (uint64_t)rhs ) : false;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint128_t::operator>=(const T &rhs) const
+    bool uint128_t::operator>=(const T &rhs) const noexcept
     {
         return ( ( *this > rhs ) | ( *this == rhs ) );
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint128_t::operator<=(const T &rhs) const
+    bool uint128_t::operator<=(const T &rhs) const noexcept
     {
         return ( ( *this < rhs ) | ( *this == rhs ) );
     }
@@ -556,14 +556,14 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t uint128_t::operator+(const T &rhs) const
+    uint128_t uint128_t::operator+(const T &rhs) const noexcept
     {
         return uint128_t( m_upper + ( ( m_lower + (uint64_t)rhs ) < m_lower ),
                          ( m_lower + (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t& uint128_t::operator+=(const T &rhs)
+    uint128_t& uint128_t::operator+=(const T &rhs) noexcept
     {
         m_upper = m_upper + ( ( m_lower + rhs ) < m_lower );
         m_lower = m_lower + rhs;
@@ -572,14 +572,14 @@ public:
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t uint128_t::operator-(const T &rhs) const
+    uint128_t uint128_t::operator-(const T &rhs) const noexcept
     {
         return uint128_t((uint64_t)(m_upper - ((m_lower - rhs) > m_lower)),
                          (uint64_t)(m_lower - rhs));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t& uint128_t::operator-=(const T &rhs)
+    uint128_t& uint128_t::operator-=(const T &rhs) noexcept
     {
         *this = *this - rhs;
 
@@ -587,13 +587,13 @@ public:
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t uint128_t::operator*(const T &rhs) const
+    uint128_t uint128_t::operator*(const T &rhs) const noexcept
     {
         return *this * uint128_t(rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t& uint128_t::operator*=(const T &rhs)
+    uint128_t& uint128_t::operator*=(const T &rhs) noexcept
     {
         *this = *this * uint128_t(rhs);
 
@@ -646,37 +646,37 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator&(const T &lhs, const uint128_t &rhs)
+    uint128_t operator&(const T &lhs, const uint128_t &rhs) noexcept
     {
         return rhs & lhs;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator&=(T &lhs, const uint128_t &rhs)
+    T &operator&=(T &lhs, const uint128_t &rhs) noexcept
     {
         return lhs = static_cast<T>(rhs & lhs);
     }
 //  ----------------------------------------------------------------------------
-    template <std::integral T>
-    uint128_t operator|(const T &lhs, const uint128_t &rhs)
+    template <std::integral T> 
+    uint128_t operator|(const T &lhs, const uint128_t &rhs) noexcept
     {
         return rhs | lhs;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator|=(T &lhs, const uint128_t &rhs)
+    T &operator|=(T &lhs, const uint128_t &rhs) noexcept
     {
         return lhs = static_cast<T>(rhs | lhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator^(const T &lhs, const uint128_t &rhs)
+    uint128_t operator^(const T &lhs, const uint128_t &rhs) noexcept
     {
         return rhs ^ lhs;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator^=(T &lhs, const uint128_t &rhs)
+    T &operator^=(T &lhs, const uint128_t &rhs) noexcept
     {
         return lhs = static_cast<T>(rhs ^ lhs);
     }
@@ -687,30 +687,30 @@ public:
 //  ----------------------------------------------------------------------------
     // Bitshift operators
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const uint64_t &lhs, const uint128_t &rhs);
+    uint128_t operator<<(const uint64_t &lhs, const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const uint32_t &lhs, const uint128_t &rhs);
+    uint128_t operator<<(const uint32_t &lhs, const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const uint16_t &lhs, const uint128_t &rhs);
+    uint128_t operator<<(const uint16_t &lhs, const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const uint8_t &lhs,  const uint128_t &rhs);
+    uint128_t operator<<(const uint8_t &lhs,  const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const int16_t &lhs,  const uint128_t &rhs);
+    uint128_t operator<<(const int16_t &lhs,  const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const int32_t &lhs,  const uint128_t &rhs);
+    uint128_t operator<<(const int32_t &lhs,  const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const int64_t &lhs,  const uint128_t &rhs);
+    uint128_t operator<<(const int64_t &lhs,  const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const int8_t &lhs,   const uint128_t &rhs);
+    uint128_t operator<<(const int8_t &lhs,   const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator<<(const bool &lhs,     const uint128_t &rhs);
+    uint128_t operator<<(const bool &lhs,     const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator<<=(T &lhs, const uint128_t &rhs)
+    T &operator<<=(T &lhs, const uint128_t &rhs) noexcept
     {
         return lhs = static_cast<T>(uint128_t(lhs) << rhs);
     }
@@ -720,30 +720,30 @@ public:
 
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const uint16_t &lhs,  const uint128_t &rhs);
+    uint128_t operator>>(const uint16_t &lhs,  const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const uint32_t &lhs,  const uint128_t &rhs);
+    uint128_t operator>>(const uint32_t &lhs,  const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const uint64_t &lhs,  const uint128_t &rhs);
+    uint128_t operator>>(const uint64_t &lhs,  const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const int16_t &lhs,   const uint128_t &rhs);
+    uint128_t operator>>(const int16_t &lhs,   const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const int32_t &lhs,   const uint128_t &rhs);
+    uint128_t operator>>(const int32_t &lhs,   const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const int64_t &lhs,   const uint128_t &rhs);
+    uint128_t operator>>(const int64_t &lhs,   const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const uint8_t &lhs,   const uint128_t &rhs);
+    uint128_t operator>>(const uint8_t &lhs,   const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const int8_t &lhs,    const uint128_t &rhs);
+    uint128_t operator>>(const int8_t &lhs,    const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t operator>>(const bool &lhs,      const uint128_t &rhs);
+    uint128_t operator>>(const bool &lhs,      const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator>>=(T &lhs, const uint128_t &rhs)
+    T &operator>>=(T &lhs, const uint128_t &rhs) noexcept
     {
         return lhs = static_cast<T>(uint128_t(lhs) >> rhs);
     }
@@ -756,25 +756,25 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator==(const T &lhs, const uint128_t &rhs)
+    bool operator==(const T &lhs, const uint128_t &rhs) noexcept
     {
         return ( not rhs.upper() && ((uint64_t)lhs == rhs.lower()));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator!=(const T &lhs, const uint128_t &rhs)
+    bool operator!=(const T &lhs, const uint128_t &rhs) noexcept
     {
         return (rhs.upper() | ((uint64_t)lhs != rhs.lower()));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator>(const T &lhs, const uint128_t &rhs)
+    bool operator>(const T &lhs, const uint128_t &rhs) noexcept
     {
         return (not rhs.upper()) && ((uint64_t)lhs > rhs.lower());
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator<(const T &lhs, const uint128_t &rhs)
+    bool operator<(const T &lhs, const uint128_t &rhs) noexcept
     {
         if (rhs.upper())
         {
@@ -784,7 +784,7 @@ public:
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator>=(const T &lhs, const uint128_t &rhs)
+    bool operator>=(const T &lhs, const uint128_t &rhs) noexcept
     {
         if (rhs.upper())
         {
@@ -794,7 +794,7 @@ public:
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator<=(const T &lhs, const uint128_t &rhs)
+    bool operator<=(const T &lhs, const uint128_t &rhs) noexcept
     {
         if (rhs.upper())
         {
@@ -811,49 +811,49 @@ public:
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator+(const T &lhs, const uint128_t &rhs)
+    uint128_t operator+(const T &lhs, const uint128_t &rhs) noexcept
     {
         return rhs + lhs;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator+=(T &lhs, const uint128_t &rhs)
+    T &operator+=(T &lhs, const uint128_t &rhs) noexcept
     {
         return lhs = static_cast<T>(rhs + lhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator-(const T &lhs, const uint128_t &rhs)
+    uint128_t operator-(const T &lhs, const uint128_t &rhs) noexcept
     {
         return -(rhs - lhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator-=(T &lhs, const uint128_t &rhs)
+    T &operator-=(T &lhs, const uint128_t &rhs) noexcept
     {
         return lhs = static_cast<T>(-(rhs - lhs));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator*(const T &lhs, const uint128_t &rhs)
+    uint128_t operator*(const T &lhs, const uint128_t &rhs) noexcept
     {
         return rhs * lhs;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator*=(T &lhs, const uint128_t &rhs)
+    T &operator*=(T &lhs, const uint128_t &rhs) noexcept
     {
         return lhs = static_cast<T>(rhs * lhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint128_t operator/(const T &lhs, const uint128_t &rhs)
+    uint128_t operator/(const T &lhs, const uint128_t &rhs) 
     {
         return uint128_t(lhs) / rhs;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator/=(T &lhs, const uint128_t &rhs)
+    T &operator/=(T &lhs, const uint128_t &rhs) 
     {
         return lhs = static_cast<T>(uint128_t(lhs) / rhs);
     }
