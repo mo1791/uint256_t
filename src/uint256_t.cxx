@@ -33,26 +33,20 @@
     // CONSTRUCTORS
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t::uint256_t()
+    uint256_t::uint256_t() noexcept
         : m_upper(uint128_0)
         , m_lower(uint128_0) 
     {}
 //  ----------------------------------------------------------------------------
-    uint256_t::uint256_t(const uint256_t &rhs)
+    uint256_t::uint256_t(const uint256_t &rhs) noexcept
         : m_upper(rhs.m_upper)
         , m_lower(rhs.m_lower)
     {}
 //  ----------------------------------------------------------------------------
-    uint256_t::uint256_t(uint256_t &&rhs)
-        : m_upper(std::move(rhs.m_upper))
-        , m_lower(std::move(rhs.m_lower))
-    {
-        if (this != &rhs)
-        {
-            rhs.m_upper = uint128_0;
-            rhs.m_lower = uint128_0;
-        }
-    }
+    uint256_t::uint256_t(uint256_t &&rhs) noexcept
+        : m_upper(std::exchange(rhs.m_upper, uint128_0))
+        , m_lower(std::exchange(rhs.m_lower, uint128_0))
+    {}
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -62,7 +56,7 @@
     // ASSIGNMENT OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator=(const uint256_t &rhs)
+    uint256_t &uint256_t::operator=(const uint256_t &rhs) noexcept
     {
         m_upper = rhs.m_upper;
         m_lower = rhs.m_lower;
@@ -70,14 +64,12 @@
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator=(uint256_t &&rhs)
+    uint256_t &uint256_t::operator=(uint256_t &&rhs) noexcept
     {
         if (this != &rhs)
         {
-            m_upper     = std::move(rhs.m_upper);
-            m_lower     = std::move(rhs.m_lower);
-            rhs.m_upper = uint128_0;
-            rhs.m_lower = uint128_0;
+            m_upper = std::exchange(rhs.m_upper, uint128_0);
+            m_lower = std::exchange(rhs.m_lower, uint128_0);
         }
 
         return *this;
@@ -92,17 +84,17 @@
     // TYPECAST OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t::operator bool() const       { return (bool)(m_upper | m_lower); }
+    uint256_t::operator bool() const noexcept { return (bool)(m_upper | m_lower); }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint8_t() const    { return (uint8_t)m_lower; }
+    uint256_t::operator uint8_t() const noexcept { return (uint8_t)m_lower; }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint16_t() const   { return (uint16_t)m_lower; }
+    uint256_t::operator uint16_t() const noexcept { return (uint16_t)m_lower; }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint32_t() const   { return (uint32_t)m_lower; }
+    uint256_t::operator uint32_t() const noexcept { return (uint32_t)m_lower; }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint64_t() const   { return (uint64_t)m_lower; }
+    uint256_t::operator uint64_t() const noexcept { return (uint64_t)m_lower; }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint128_t() const  { return m_lower; }
+    uint256_t::operator uint128_t() const noexcept { return m_lower; }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -113,17 +105,17 @@
     // BITWISE MEMBER OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator&(const uint128_t &rhs) const
+    uint256_t uint256_t::operator&(const uint128_t &rhs) const noexcept
     {
         return uint256_t(uint128_0, m_lower & rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator&(const uint256_t &rhs) const
+    uint256_t uint256_t::operator&(const uint256_t &rhs) const noexcept
     {
         return uint256_t(m_upper & rhs.m_upper, m_lower & rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator&=(const uint128_t &rhs)
+    uint256_t &uint256_t::operator&=(const uint128_t &rhs) noexcept
     {
         m_upper  = uint128_0;
         m_lower &= rhs;
@@ -131,7 +123,7 @@
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator&=(const uint256_t &rhs)
+    uint256_t &uint256_t::operator&=(const uint256_t &rhs) noexcept
     {
         m_upper &= rhs.m_upper;
         m_lower &= rhs.m_lower;
@@ -139,24 +131,24 @@
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator|(const uint128_t &rhs) const
+    uint256_t uint256_t::operator|(const uint128_t &rhs) const noexcept
     {
         return uint256_t(m_upper, m_lower | rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator|(const uint256_t &rhs) const
+    uint256_t uint256_t::operator|(const uint256_t &rhs) const noexcept
     {
         return uint256_t(m_upper | rhs.m_upper, m_lower | rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator|=(const uint128_t &rhs)
+    uint256_t &uint256_t::operator|=(const uint128_t &rhs) noexcept
     {
         m_lower |= rhs;
         
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator|=(const uint256_t &rhs)
+    uint256_t &uint256_t::operator|=(const uint256_t &rhs) noexcept
     {
         m_upper |= rhs.m_upper;
         m_lower |= rhs.m_lower;
@@ -164,24 +156,24 @@
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator^(const uint128_t &rhs) const
+    uint256_t uint256_t::operator^(const uint128_t &rhs) const noexcept
     {
         return uint256_t(m_upper, m_lower ^ rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator^(const uint256_t &rhs) const
+    uint256_t uint256_t::operator^(const uint256_t &rhs) const noexcept
     {
         return uint256_t(m_upper ^ rhs.m_upper, m_lower ^ rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator^=(const uint128_t &rhs)
+    uint256_t &uint256_t::operator^=(const uint128_t &rhs) noexcept
     {
         m_lower ^= rhs;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator^=(const uint256_t &rhs)
+    uint256_t &uint256_t::operator^=(const uint256_t &rhs) noexcept
     {
         m_upper ^= rhs.m_upper;
         m_lower ^= rhs.m_lower;
@@ -189,7 +181,7 @@
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator~() const
+    uint256_t uint256_t::operator~() const noexcept
     { 
         return uint256_t(~m_upper, ~m_lower);
     }
@@ -203,12 +195,12 @@
     // BITSHIFT MEMBER OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator<<(const uint128_t &rhs) const
+    uint256_t uint256_t::operator<<(const uint128_t &rhs) const noexcept
     {
         return *this << uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator<<(const uint256_t &rhs) const
+    uint256_t uint256_t::operator<<(const uint256_t &rhs) const noexcept
     {
         const uint128_t shift = rhs.m_lower;
     
@@ -239,24 +231,24 @@
         }
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator<<=(const uint128_t &shift)
+    uint256_t &uint256_t::operator<<=(const uint128_t &shift) noexcept
     {
         return *this <<= uint256_t(shift);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator<<=(const uint256_t &shift)
+    uint256_t &uint256_t::operator<<=(const uint256_t &shift) noexcept
     {
         *this = *this << shift;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator>>(const uint128_t &rhs) const
+    uint256_t uint256_t::operator>>(const uint128_t &rhs) const noexcept
     {
         return *this >> uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator>>(const uint256_t &rhs) const
+    uint256_t uint256_t::operator>>(const uint256_t &rhs) const noexcept
     {
         const uint128_t shift = rhs.m_lower;
 
@@ -286,12 +278,12 @@
         }
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator>>=(const uint128_t &shift)
+    uint256_t &uint256_t::operator>>=(const uint128_t &shift) noexcept
     {
         return *this >>= uint256_t(shift);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator>>=(const uint256_t &shift)
+    uint256_t &uint256_t::operator>>=(const uint256_t &shift) noexcept
     {
         *this = *this >> shift;
     
@@ -306,27 +298,27 @@
     // LOGICAL MEMBER OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator!() const
+    bool uint256_t::operator!() const noexcept
     { 
         return not( (bool)*this );
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator&&(const uint128_t &rhs) const
+    bool uint256_t::operator&&(const uint128_t &rhs) const noexcept
     {
         return (*this && uint256_t(rhs));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator&&(const uint256_t &rhs) const
+    bool uint256_t::operator&&(const uint256_t &rhs) const noexcept
     {
         return ((bool)*this && (bool)rhs);
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator||(const uint128_t &rhs) const
-    {
+    bool uint256_t::operator||(const uint128_t &rhs) const noexcept
+    { 
         return (*this || uint256_t(rhs));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator||(const uint256_t &rhs) const
+    bool uint256_t::operator||(const uint256_t &rhs) const noexcept
     {
         return ((bool)*this || (bool)rhs);
     }
@@ -340,32 +332,32 @@
     // COMPARAISON MEMBER OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator==(const uint128_t &rhs) const
+    bool uint256_t::operator==(const uint128_t &rhs) const noexcept
     {
         return (*this == uint256_t(rhs));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator==(const uint256_t &rhs) const
+    bool uint256_t::operator==(const uint256_t &rhs) const noexcept
     {
         return ((m_upper == rhs.m_upper) && (m_lower == rhs.m_lower));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator!=(const uint128_t &rhs) const
+    bool uint256_t::operator!=(const uint128_t &rhs) const noexcept
     {
         return (*this != uint256_t(rhs));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator!=(const uint256_t &rhs) const
+    bool uint256_t::operator!=(const uint256_t &rhs) const noexcept
     {
         return ((m_upper != rhs.m_upper) | (m_lower != rhs.m_lower));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator>(const uint128_t &rhs) const
+    bool uint256_t::operator>(const uint128_t &rhs) const noexcept
     {
         return (*this > uint256_t(rhs));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator>(const uint256_t &rhs) const
+    bool uint256_t::operator>(const uint256_t &rhs) const noexcept
     {
         if (m_upper == rhs.m_upper)
         {
@@ -380,12 +372,12 @@
         return false;
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator<(const uint128_t &rhs) const
+    bool uint256_t::operator<(const uint128_t &rhs) const noexcept
     {
         return (*this < uint256_t(rhs));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator<(const uint256_t &rhs) const
+    bool uint256_t::operator<(const uint256_t &rhs) const noexcept
     {
         if (m_upper == rhs.m_upper)
         {
@@ -400,22 +392,22 @@
         return false;
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator>=(const uint128_t &rhs) const
+    bool uint256_t::operator>=(const uint128_t &rhs) const noexcept
     {
         return (*this >= uint256_t(rhs));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator>=(const uint256_t &rhs) const
+    bool uint256_t::operator>=(const uint256_t &rhs) const noexcept
     {
         return ((*this > rhs) | (*this == rhs));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator<=(const uint128_t &rhs) const
+    bool uint256_t::operator<=(const uint128_t &rhs) const noexcept
     {
         return (*this <= uint256_t(rhs));
     }
 //  ----------------------------------------------------------------------------
-    bool uint256_t::operator<=(const uint256_t &rhs) const
+    bool uint256_t::operator<=(const uint256_t &rhs) const noexcept
     {
         return ((*this < rhs) | (*this == rhs));
     }
@@ -429,12 +421,12 @@
     // ARITHMETIC MEMBER OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator+(const uint128_t &rhs) const
+    uint256_t uint256_t::operator+(const uint128_t &rhs) const noexcept
     {
         return *this + uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator+(const uint256_t &rhs) const
+    uint256_t uint256_t::operator+(const uint256_t &rhs) const noexcept
     {
         return uint256_t(
             m_upper + rhs.m_upper +
@@ -442,12 +434,12 @@
             m_lower + rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator+=(const uint128_t &rhs)
+    uint256_t &uint256_t::operator+=(const uint128_t &rhs) noexcept
     {
         return *this += uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator+=(const uint256_t &rhs)
+    uint256_t &uint256_t::operator+=(const uint256_t &rhs) noexcept
     {
         m_upper = rhs.m_upper + m_upper + ((m_lower + rhs.m_lower) < m_lower);
         m_lower = m_lower + rhs.m_lower;
@@ -455,35 +447,35 @@
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator-(const uint128_t &rhs) const
+    uint256_t uint256_t::operator-(const uint128_t &rhs) const noexcept
     {
         return *this - uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator-(const uint256_t &rhs) const
+    uint256_t uint256_t::operator-(const uint256_t &rhs) const noexcept
     {
         return uint256_t(m_upper - rhs.m_upper - ((m_lower - rhs.m_lower) > m_lower),
                         m_lower - rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator-=(const uint128_t &rhs)
+    uint256_t &uint256_t::operator-=(const uint128_t &rhs) noexcept
     {
         return *this -= uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator-=(const uint256_t &rhs)
+    uint256_t &uint256_t::operator-=(const uint256_t &rhs) noexcept
     {
         *this = *this - rhs;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator*(const uint128_t &rhs) const
+    uint256_t uint256_t::operator*(const uint128_t &rhs) const noexcept
     {
         return *this * uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator*(const uint256_t &rhs) const
+    uint256_t uint256_t::operator*(const uint256_t &rhs) const noexcept
     {
         // split values into 4 64-bit parts
         std::array<uint128_t, 4> top 
@@ -538,12 +530,13 @@
                uint256_t(second64, uint128_0) + uint256_t(fourth64);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator*=(const uint128_t &rhs)
+    uint256_t &uint256_t::operator*=(const uint128_t &rhs) noexcept
     {
         return *this *= uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator*=(const uint256_t &rhs) {
+    uint256_t &uint256_t::operator*=(const uint256_t &rhs) noexcept
+    {
         *this = *this * rhs;
 
         return *this;
@@ -648,14 +641,14 @@
     // INCREMENT & DECREMENT MEMBER OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator++()
+    uint256_t &uint256_t::operator++() noexcept
     {
         *this += uint256_1;
     
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator++(int)
+    uint256_t uint256_t::operator++(int) noexcept
     {
         uint256_t temp(*this);
         ++*this;
@@ -663,14 +656,14 @@
         return temp;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t &uint256_t::operator--()
+    uint256_t &uint256_t::operator--() noexcept
     {
         *this -= uint256_1;
     
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator--(int)
+    uint256_t uint256_t::operator--(int) noexcept
     {
         uint256_t temp(*this);
         --*this;
@@ -685,12 +678,12 @@
 
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator+() const
+    uint256_t uint256_t::operator+() const noexcept
     {
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t uint256_t::operator-() const
+    uint256_t uint256_t::operator-() const noexcept
     {
         return ~*this + uint256_1;
     }
@@ -704,9 +697,9 @@
     // GETTER
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    const uint128_t &uint256_t::upper() const { return m_upper; }
+    const uint128_t &uint256_t::upper() const noexcept { return m_upper; }
 //  ----------------------------------------------------------------------------
-    const uint128_t &uint256_t::lower() const { return m_lower; }
+    const uint128_t &uint256_t::lower() const noexcept { return m_lower; }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -715,7 +708,7 @@
 
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint16_t uint256_t::bits() const
+    uint16_t uint256_t::bits() const noexcept
     {
         uint16_t out = 0;
         if (m_upper)
@@ -792,36 +785,36 @@
     // BITWISE OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t operator&(const uint128_t &lhs, const uint256_t &rhs)
+    uint256_t operator&(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs & lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator&=(uint128_t &lhs, const uint256_t &rhs)
+    uint128_t &operator&=(uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         lhs = (rhs & lhs).lower();
 
         return lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator|(const uint128_t &lhs, const uint256_t &rhs)
+    uint256_t operator|(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs | lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator|=(uint128_t &lhs, const uint256_t &rhs)
+    uint128_t &operator|=(uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         lhs = (rhs | lhs).lower();
 
         return lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator^(const uint128_t &lhs, const uint256_t &rhs)
+    uint256_t operator^(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs ^ lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator^=(uint128_t &lhs, const uint256_t &rhs)
+    uint128_t &operator^=(uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         lhs = (rhs ^ lhs).lower();
 
@@ -837,114 +830,114 @@
     // BITSHIFT OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const bool &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const bool &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint8_t &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const uint8_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint16_t &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const uint16_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint32_t &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const uint32_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint64_t &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const uint64_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint128_t &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const int8_t &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const int8_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const int16_t &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const int16_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const int32_t &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const int32_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const int64_t &lhs, const uint256_t &rhs)
+    uint256_t operator<<(const int64_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) << rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator<<=(uint128_t &lhs, const uint256_t &rhs)
+    uint128_t &operator<<=(uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         lhs = (uint256_t(lhs) << rhs).lower();
 
         return lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const bool &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const bool &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint8_t &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const uint8_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint16_t &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const uint16_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint32_t &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const uint32_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint64_t &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const uint64_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint128_t &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const int8_t &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const int8_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const int16_t &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const int16_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const int32_t &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const int32_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const int64_t &lhs, const uint256_t &rhs)
+    uint256_t operator>>(const int64_t &lhs, const uint256_t &rhs) noexcept
     {
         return uint256_t(lhs) >> rhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator>>=(uint128_t &lhs, const uint256_t &rhs)
+    uint128_t &operator>>=(uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         lhs = (uint256_t(lhs) >> rhs).lower();
         
@@ -960,32 +953,32 @@
     // Comparison Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    bool operator==(const uint128_t &lhs, const uint256_t &rhs)
+    bool operator==(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs == lhs;
     }
 //  ----------------------------------------------------------------------------
-    bool operator!=(const uint128_t &lhs, const uint256_t &rhs)
+    bool operator!=(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs != lhs;
     }
 //  ----------------------------------------------------------------------------
-    bool operator>(const uint128_t &lhs, const uint256_t &rhs)
+    bool operator>(const uint128_t &lhs, const uint256_t &rhs) noexcept
     { 
         return rhs < lhs;
     }
 //  ----------------------------------------------------------------------------
-    bool operator<(const uint128_t &lhs, const uint256_t &rhs)
+    bool operator<(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs > lhs;
     }
 //  ----------------------------------------------------------------------------
-    bool operator>=(const uint128_t &lhs, const uint256_t &rhs)
+    bool operator>=(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs <= lhs;
     }
 //  ----------------------------------------------------------------------------
-    bool operator<=(const uint128_t &lhs, const uint256_t &rhs)
+    bool operator<=(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs >= lhs;
     }
@@ -999,36 +992,36 @@
     // Arithmetic Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t operator+(const uint128_t &lhs, const uint256_t &rhs)
+    uint256_t operator+(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs + lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator+=(uint128_t &lhs, const uint256_t &rhs)
+    uint128_t &operator+=(uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         lhs = (rhs + lhs).lower();
        
         return lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator-(const uint128_t &lhs, const uint256_t &rhs)
+    uint256_t operator-(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return -(rhs - lhs);
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator-=(uint128_t &lhs, const uint256_t &rhs)
+    uint128_t &operator-=(uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         lhs = (-(rhs - lhs)).lower();
     
         return lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator*(const uint128_t &lhs, const uint256_t &rhs)
+    uint256_t operator*(const uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         return rhs * lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator*=(uint128_t &lhs, const uint256_t &rhs)
+    uint128_t &operator*=(uint128_t &lhs, const uint256_t &rhs) noexcept
     {
         lhs = (rhs * lhs).lower();
     

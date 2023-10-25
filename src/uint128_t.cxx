@@ -60,8 +60,8 @@
     {
         if (this != &rhs)
         {
-            m_upper     = std::exchange(rhs.m_upper, 0);
-            m_lower     = std::exchange(rhs.m_lower, 0);
+            m_upper = std::exchange(rhs.m_upper, 0);
+            m_lower = std::exchange(rhs.m_lower, 0);
         }
 
         return *this;

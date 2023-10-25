@@ -49,20 +49,21 @@
         // Constructors
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        uint256_t();
+        uint256_t() noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t(const uint256_t &rhs);
+        uint256_t(const uint256_t &rhs) noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t(uint256_t &&rhs);
+        uint256_t(uint256_t &&rhs) noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t(const T &rhs);
+        uint256_t(const T &rhs) noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral S, std::integral T>
-        uint256_t(const S &upper_rhs, const T &lower_rhs);
+        uint256_t(const S &upper_rhs, const T &lower_rhs) noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral R, std::integral S, std::integral T, std::integral U>
-        uint256_t(const R &upper_lhs, const S &lower_lhs, const T &upper_rhs, const U &lower_rhs);
+        uint256_t(const R &upper_lhs, const S &lower_lhs, const T &upper_rhs,
+               const U &lower_rhs) noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -73,12 +74,12 @@
         // Assignment Operator
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        uint256_t &operator=(const uint256_t &rhs);
+        uint256_t &operator=(const uint256_t &rhs) noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t &operator=(uint256_t &&rhs);        
+        uint256_t &operator=(uint256_t &&rhs) noexcept;        
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t& operator=(const T &rhs);
+        uint256_t& operator=(const T &rhs) noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -88,17 +89,17 @@
         // Typecast Operators
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        operator bool() const;
+        operator bool() const noexcept;
     //  ----------------------------------------------------------------------------
-        operator uint8_t() const;
+        operator uint8_t() const noexcept;
     //  ----------------------------------------------------------------------------
-        operator uint16_t() const;
+        operator uint16_t() const noexcept;
     //  ----------------------------------------------------------------------------
-        operator uint32_t() const;
+        operator uint32_t() const noexcept;
     //  ----------------------------------------------------------------------------
-        operator uint64_t() const;
+        operator uint64_t() const noexcept;
     //  ----------------------------------------------------------------------------
-        operator uint128_t() const;
+        operator uint128_t() const noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -108,49 +109,49 @@
         // Bitwise Operators
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        uint256_t operator&(const uint128_t &rhs) const;
+        uint256_t operator&(const uint128_t &rhs) const noexcept;
     //  ---------------------------------------------------------------------------- 
-        uint256_t operator&(const uint256_t &rhs) const;
+        uint256_t operator&(const uint256_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t operator&(const T &rhs) const;
+        uint256_t operator&(const T &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t &operator&=(const uint128_t &rhs);
+        uint256_t &operator&=(const uint128_t &rhs) noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t &operator&=(const uint256_t &rhs);
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        uint256_t &operator&=(const T &rhs);
-    //  ----------------------------------------------------------------------------
-        uint256_t operator|(const uint128_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        uint256_t operator|(const uint256_t &rhs) const;
+        uint256_t &operator&=(const uint256_t &rhs) noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t operator|(const T &rhs) const;
+        uint256_t &operator&=(const T &rhs) noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t &operator|=(const uint128_t &rhs);
+        uint256_t operator|(const uint128_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t &operator|=(const uint256_t &rhs);
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        uint256_t &operator|=(const T &rhs);
-    //  ----------------------------------------------------------------------------
-        uint256_t operator^(const uint128_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        uint256_t operator^(const uint256_t &rhs) const;
+        uint256_t operator|(const uint256_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t operator^(const T &rhs) const;
+        uint256_t operator|(const T &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t &operator^=(const uint128_t &rhs);
+        uint256_t &operator|=(const uint128_t &rhs) noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t &operator^=(const uint256_t &rhs);
+        uint256_t &operator|=(const uint256_t &rhs) noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t &operator^=(const T &rhs);
+        uint256_t &operator|=(const T &rhs) noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator~() const;
+        uint256_t operator^(const uint128_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t operator^(const uint256_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        uint256_t operator^(const T &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t &operator^=(const uint128_t &rhs) noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t &operator^=(const uint256_t &rhs) noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        uint256_t &operator^=(const T &rhs) noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t operator~() const noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -160,33 +161,33 @@
         // Bit Shift Operators
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        uint256_t operator<<(const uint128_t &shift) const;
+        uint256_t operator<<(const uint128_t &shift) const noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator<<(const uint256_t &shift) const;
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        uint256_t operator<<(const T &rhs) const;
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator<<=(const uint128_t &shift);
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator<<=(const uint256_t &shift);
+        uint256_t operator<<(const uint256_t &shift) const noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t &operator<<=(const T &rhs);
+        uint256_t operator<<(const T &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator>>(const uint128_t &shift) const;
+        uint256_t &operator<<=(const uint128_t &shift) noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator>>(const uint256_t &shift) const;
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        uint256_t operator>>(const T &rhs) const;
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator>>=(const uint128_t &shift);
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator>>=(const uint256_t &shift);
+        uint256_t &operator<<=(const uint256_t &shift) noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t &operator>>=(const T &rhs);
+        uint256_t &operator<<=(const T &rhs) noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t operator>>(const uint128_t &shift) const noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t operator>>(const uint256_t &shift) const noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        uint256_t operator>>(const T &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t &operator>>=(const uint128_t &shift) noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t &operator>>=(const uint256_t &shift) noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        uint256_t &operator>>=(const T &rhs) noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -196,21 +197,21 @@
         // Logical Operators
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        bool operator!() const;
+        bool operator!() const noexcept;
     //  ----------------------------------------------------------------------------
-        bool operator&&(const uint128_t &rhs) const;
+        bool operator&&(const uint128_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        bool operator&&(const uint256_t &rhs) const; 
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        bool operator&&(const T &rhs) const;
-    //  ----------------------------------------------------------------------------
-        bool operator||(const uint128_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        bool operator||(const uint256_t &rhs) const;
+        bool operator&&(const uint256_t &rhs) const noexcept;  
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        bool operator||(const T &rhs) const;
+        bool operator&&(const T &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        bool operator||(const uint128_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        bool operator||(const uint256_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        bool operator||(const T &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -220,47 +221,47 @@
         // Comparison Operators
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        bool operator==(const uint128_t &rhs) const;
+        bool operator==(const uint128_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        bool operator==(const uint256_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        bool operator==(const T &rhs) const;
-    //  ----------------------------------------------------------------------------
-        bool operator!=(const uint128_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        bool operator!=(const uint256_t &rhs) const;
+        bool operator==(const uint256_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        bool operator!=(const T &rhs) const;
+        bool operator==(const T &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        bool operator>(const uint128_t &rhs) const;
+        bool operator!=(const uint128_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        bool operator>(const uint256_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        bool operator>(const T &rhs) const;
-    //  ----------------------------------------------------------------------------
-        bool operator<(const uint128_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        bool operator<(const uint256_t &rhs) const;
+        bool operator!=(const uint256_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        bool operator<(const T &rhs) const;
+        bool operator!=(const T &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        bool operator>=(const uint128_t &rhs) const;
+        bool operator>(const uint128_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        bool operator>=(const uint256_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        bool operator>=(const T &rhs) const;
-    //  ----------------------------------------------------------------------------
-        bool operator<=(const uint128_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        bool operator<=(const uint256_t &rhs) const;
+        bool operator>(const uint256_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        bool operator<=(const T &rhs) const;
+        bool operator>(const T &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        bool operator<(const uint128_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        bool operator<(const uint256_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        bool operator<(const T &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        bool operator>=(const uint128_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        bool operator>=(const uint256_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        bool operator>=(const T &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        bool operator<=(const uint128_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        bool operator<=(const uint256_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        bool operator<=(const T &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -270,47 +271,47 @@
         // Arithmetic Operators
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        uint256_t operator+(const uint128_t &rhs) const;
+        uint256_t operator+(const uint128_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator+(const uint256_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        uint256_t operator+(const T &rhs) const;
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator+=(const uint128_t &rhs);
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator+=(const uint256_t &rhs);
+        uint256_t operator+(const uint256_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t &operator+=(const T &rhs);
+        uint256_t operator+(const T &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator-(const uint128_t &rhs) const;
+        uint256_t &operator+=(const uint128_t &rhs) noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator-(const uint256_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        uint256_t operator-(const T &rhs) const;
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator-=(const uint128_t &rhs);
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator-=(const uint256_t &rhs);
+        uint256_t &operator+=(const uint256_t &rhs) noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t &operator-=(const T &rhs);
+        uint256_t &operator+=(const T &rhs) noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator*(const uint128_t &rhs) const;
+        uint256_t operator-(const uint128_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator*(const uint256_t &rhs) const;
-    //  ----------------------------------------------------------------------------
-        template <std::integral T>
-        uint256_t operator*(const T &rhs) const;
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator*=(const uint128_t &rhs);
-    //  ----------------------------------------------------------------------------
-        uint256_t &operator*=(const uint256_t &rhs);
+        uint256_t operator-(const uint256_t &rhs) const noexcept;
     //  ----------------------------------------------------------------------------
         template <std::integral T>
-        uint256_t &operator*=(const T &rhs);
+        uint256_t operator-(const T &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t &operator-=(const uint128_t &rhs) noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t &operator-=(const uint256_t &rhs) noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        uint256_t &operator-=(const T &rhs) noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t operator*(const uint128_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t operator*(const uint256_t &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        uint256_t operator*(const T &rhs) const noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t &operator*=(const uint128_t &rhs) noexcept;
+    //  ----------------------------------------------------------------------------
+        uint256_t &operator*=(const uint256_t &rhs) noexcept;
+    //  ----------------------------------------------------------------------------
+        template <std::integral T>
+        uint256_t &operator*=(const T &rhs) noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -362,9 +363,9 @@
         // Increment Operators
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        uint256_t &operator++();
+        uint256_t &operator++() noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator++(int);
+        uint256_t operator++(int) noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -373,20 +374,18 @@
         // Decrement Operators
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        uint256_t &operator--();
+        uint256_t &operator--() noexcept;
     //  ----------------------------------------------------------------------------
-        uint256_t operator--(int);
+        uint256_t operator--(int) noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
 
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        // Nothing done since promotion doesn't work here
-        uint256_t operator+() const;
+        uint256_t operator+() const noexcept;
     //  ----------------------------------------------------------------------------
-        // two's complement
-        uint256_t operator-() const;
+        uint256_t operator-() const noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -395,9 +394,9 @@
         // Get private values
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        const uint128_t &upper() const;
+        const uint128_t &upper() const noexcept;
     //  ----------------------------------------------------------------------------
-        const uint128_t &lower() const;
+        const uint128_t &lower() const noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -407,7 +406,7 @@
         // Get bitsize of value
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
-        uint16_t bits() const;
+        uint16_t bits() const noexcept;
     //  ----------------------------------------------------------------------------
     //  ----------------------------------------------------------------------------
 
@@ -445,19 +444,19 @@
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t::uint256_t(const T &rhs)
+    uint256_t::uint256_t(const T &rhs) noexcept
         : m_upper(uint128_0)
         , m_lower(rhs)
     {}
 //  ----------------------------------------------------------------------------
     template <std::integral S, std::integral T>
-    uint256_t::uint256_t(const S &upper_rhs, const T &lower_rhs)
+    uint256_t::uint256_t(const S &upper_rhs, const T &lower_rhs) noexcept
         : m_upper(upper_rhs)
         , m_lower(lower_rhs)
     {}
 //  ----------------------------------------------------------------------------
     template <std::integral R, std::integral S, std::integral T, std::integral U>
-    uint256_t::uint256_t(const R &upper_lhs, const S &lower_lhs, const T &upper_rhs, const U &lower_rhs)
+    uint256_t::uint256_t(const R &upper_lhs, const S &lower_lhs, const T &upper_rhs, const U &lower_rhs) noexcept
         : m_upper(upper_lhs, lower_lhs)
         , m_lower(upper_rhs, lower_rhs)
     {}
@@ -472,7 +471,7 @@
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t& uint256_t::operator=(const T &rhs)
+    uint256_t& uint256_t::operator=(const T &rhs) noexcept
     {
         m_upper = uint128_0;
         m_lower = rhs;
@@ -489,13 +488,13 @@
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t uint256_t::operator&(const T &rhs) const
+    uint256_t uint256_t::operator&(const T &rhs) const noexcept
     {
         return uint256_t(uint128_0, m_lower & (uint128_t)rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t &uint256_t::operator&=(const T &rhs)
+    uint256_t &uint256_t::operator&=(const T &rhs) noexcept
     {
         m_upper = uint128_0;
         m_lower &= rhs;
@@ -504,13 +503,13 @@
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t uint256_t::operator|(const T &rhs) const
+    uint256_t uint256_t::operator|(const T &rhs) const noexcept
     {
         return uint256_t(m_upper, m_lower | uint128_t(rhs));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t &uint256_t::operator|=(const T &rhs)
+    uint256_t &uint256_t::operator|=(const T &rhs) noexcept
     {
         m_lower |= (uint128_t)rhs;
         
@@ -518,13 +517,13 @@
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t uint256_t::operator^(const T &rhs) const
+    uint256_t uint256_t::operator^(const T &rhs) const noexcept
     {
         return uint256_t(m_upper, m_lower ^ (uint128_t)rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t &uint256_t::operator^=(const T &rhs)
+    uint256_t &uint256_t::operator^=(const T &rhs) noexcept
     {
         m_lower ^= (uint128_t)rhs;
         
@@ -539,50 +538,50 @@
     // Bitwise Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t operator&(const uint128_t &lhs, const uint256_t &rhs);
+    uint256_t operator&(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t operator&(const T &lhs, const uint256_t &rhs)
+    uint256_t operator&(const T &lhs, const uint256_t &rhs) noexcept
     {
         return rhs & lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator&=(uint128_t &lhs, const uint256_t &rhs);
+    uint128_t &operator&=(uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator&=(T &lhs, const uint256_t &rhs)
+    T &operator&=(T &lhs, const uint256_t &rhs) noexcept
     {
         return lhs = static_cast<T>(rhs & lhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator|(const uint128_t &lhs, const uint256_t &rhs);
+    uint256_t operator|(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t operator|(const T &lhs, const uint256_t &rhs)
+    uint256_t operator|(const T &lhs, const uint256_t &rhs) noexcept
     {
         return rhs | lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator|=(uint128_t &lhs, const uint256_t &rhs);
+    uint128_t &operator|=(uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator|=(T &lhs, const uint256_t &rhs)
+    T &operator|=(T &lhs, const uint256_t &rhs) noexcept
     {
         return lhs = static_cast<T>(rhs | lhs);
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator^(const uint128_t &lhs, const uint256_t &rhs);
+    uint256_t operator^(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t operator^(const T &lhs, const uint256_t &rhs)
+    uint256_t operator^(const T &lhs, const uint256_t &rhs) noexcept
     {
         return rhs ^ lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator^=(uint128_t &lhs, const uint256_t &rhs);
+    uint128_t &operator^=(uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator^=(T &lhs, const uint256_t &rhs)
+    T &operator^=(T &lhs, const uint256_t &rhs) noexcept
     {
         return lhs = static_cast<T>(rhs ^ lhs);
     }
@@ -596,13 +595,13 @@
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t uint256_t::operator<<(const T &rhs) const
+    uint256_t uint256_t::operator<<(const T &rhs) const noexcept
     {
         return *this << uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t &uint256_t::operator<<=(const T &rhs)
+    uint256_t &uint256_t::operator<<=(const T &rhs) noexcept
     {
         *this = *this << uint256_t(rhs);
 
@@ -610,13 +609,13 @@
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t uint256_t::operator>>(const T &rhs) const
+    uint256_t uint256_t::operator>>(const T &rhs) const noexcept
     {
         return *this >> uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t &uint256_t::operator>>=(const T &rhs)
+    uint256_t &uint256_t::operator>>=(const T &rhs) noexcept
     {
         *this = *this >> uint256_t(rhs);
         
@@ -631,60 +630,60 @@
     // Bitshift operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const bool &lhs,       const uint256_t &rhs);
+    uint256_t operator<<(const bool &lhs,       const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint8_t &lhs,    const uint256_t &rhs);
+    uint256_t operator<<(const uint8_t &lhs,    const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint16_t &lhs,   const uint256_t &rhs);
+    uint256_t operator<<(const uint16_t &lhs,   const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint32_t &lhs,   const uint256_t &rhs);
+    uint256_t operator<<(const uint32_t &lhs,   const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint64_t &lhs,   const uint256_t &rhs);
+    uint256_t operator<<(const uint64_t &lhs,   const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const uint128_t &lhs,  const uint256_t &rhs);
+    uint256_t operator<<(const uint128_t &lhs,  const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const int8_t &lhs,     const uint256_t &rhs);
+    uint256_t operator<<(const int8_t &lhs,     const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const int16_t &lhs,    const uint256_t &rhs);
+    uint256_t operator<<(const int16_t &lhs,    const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const int32_t &lhs,    const uint256_t &rhs);
+    uint256_t operator<<(const int32_t &lhs,    const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator<<(const int64_t &lhs,    const uint256_t &rhs);
+    uint256_t operator<<(const int64_t &lhs,    const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator<<=(uint128_t &lhs,      const uint256_t &rhs);
+    uint128_t &operator<<=(uint128_t &lhs,      const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator<<=(T &lhs, const uint256_t &rhs)
+    T &operator<<=(T &lhs, const uint256_t &rhs) noexcept
     {
         lhs = static_cast<T>(uint256_t(lhs) << rhs);
 
         return lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const bool &lhs,       const uint256_t &rhs);
+    uint256_t operator>>(const bool &lhs,       const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint8_t &lhs,    const uint256_t &rhs);
+    uint256_t operator>>(const uint8_t &lhs,    const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint16_t &lhs,   const uint256_t &rhs);
+    uint256_t operator>>(const uint16_t &lhs,   const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint32_t &lhs,   const uint256_t &rhs);
+    uint256_t operator>>(const uint32_t &lhs,   const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint64_t &lhs,   const uint256_t &rhs);
+    uint256_t operator>>(const uint64_t &lhs,   const uint256_t &rhs) noexcept; 
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const uint128_t &lhs,  const uint256_t &rhs);
+    uint256_t operator>>(const uint128_t &lhs,  const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const int8_t &lhs,     const uint256_t &rhs);
+    uint256_t operator>>(const int8_t &lhs,     const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const int16_t &lhs,    const uint256_t &rhs);
+    uint256_t operator>>(const int16_t &lhs,    const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const int32_t &lhs,    const uint256_t &rhs);
+    uint256_t operator>>(const int32_t &lhs,    const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t operator>>(const int64_t &lhs,    const uint256_t &rhs);
+    uint256_t operator>>(const int64_t &lhs,    const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator>>=(uint128_t &lhs, const uint256_t &rhs);
+    uint128_t &operator>>=(uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator>>=(T &lhs, const uint256_t &rhs)
+    T &operator>>=(T &lhs, const uint256_t &rhs) noexcept
     {
         return lhs = static_cast<T>(uint256_t(lhs) >> rhs);
     }
@@ -699,37 +698,37 @@
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint256_t::operator==(const T &rhs) const
+    bool uint256_t::operator==(const T &rhs) const noexcept
     {
         return (not m_upper && (m_lower == uint128_t(rhs)));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint256_t::operator!=(const T &rhs) const
+    bool uint256_t::operator!=(const T &rhs) const noexcept
     {
         return ((bool)m_upper | (m_lower != uint128_t(rhs)));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint256_t::operator>(const T &rhs) const
+    bool uint256_t::operator>(const T &rhs) const noexcept
     {
         return ((bool)m_upper | (m_lower > uint128_t(rhs)));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint256_t::operator<(const T &rhs) const
+    bool uint256_t::operator<(const T &rhs) const noexcept
     {
         return (not m_upper) ? (m_lower < uint128_t(rhs)) : false;
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint256_t::operator>=(const T &rhs) const
+    bool uint256_t::operator>=(const T &rhs) const noexcept
     {
         return ((*this > rhs) | (*this == rhs));
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint256_t::operator<=(const T &rhs) const
+    bool uint256_t::operator<=(const T &rhs) const noexcept
     {
         return ((*this < rhs) | (*this == rhs));
     }
@@ -741,50 +740,50 @@
     // Comparison Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    bool operator==(const uint128_t &lhs, const uint256_t &rhs);
+    bool operator==(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator==(const T &lhs, const uint256_t &rhs)
+    bool operator==(const T &lhs, const uint256_t &rhs) noexcept
     {
         return (not rhs.upper() && ((uint64_t)lhs == rhs.lower()));
     }
 //  ----------------------------------------------------------------------------
-    bool operator!=(const uint128_t &lhs, const uint256_t &rhs);
+    bool operator!=(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator!=(const T &lhs, const uint256_t &rhs)
+    bool operator!=(const T &lhs, const uint256_t &rhs) noexcept
     {
         return (rhs.upper() | ((uint64_t)lhs != rhs.lower()));
     }
 //  ----------------------------------------------------------------------------
-    bool operator>(const uint128_t &lhs, const uint256_t &rhs);
+    bool operator>(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator>(const T &lhs, const uint256_t &rhs)
+    bool operator>(const T &lhs, const uint256_t &rhs) noexcept
     {
         return rhs.upper() ? false : ((uint128_t)lhs > rhs.lower());
     }
 //  ----------------------------------------------------------------------------
-    bool operator<(const uint128_t &lhs, const uint256_t &rhs);
+    bool operator<(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator<(const T &lhs, const uint256_t &rhs)
+    bool operator<(const T &lhs, const uint256_t &rhs) noexcept
     {
         return rhs.upper() ? true : ((uint128_t)lhs < rhs.lower());
     }
 //  ----------------------------------------------------------------------------
-    bool operator>=(const uint128_t &lhs, const uint256_t &rhs);
+    bool operator>=(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator>=(const T &lhs, const uint256_t &rhs)
+    bool operator>=(const T &lhs, const uint256_t &rhs) noexcept
     {
         return rhs.upper() ? false : ((uint128_t)lhs >= rhs.lower());
     }
 //  ----------------------------------------------------------------------------
-    bool operator<=(const uint128_t &lhs, const uint256_t &rhs);
+    bool operator<=(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool operator<=(const T &lhs, const uint256_t &rhs)
+    bool operator<=(const T &lhs, const uint256_t &rhs) noexcept
     {
         return rhs.upper() ? true : ((uint128_t)lhs <= rhs.lower());
     }
@@ -798,14 +797,14 @@
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t uint256_t::operator+(const T &rhs) const
+    uint256_t uint256_t::operator+(const T &rhs) const noexcept
     {
         return uint256_t(m_upper + ((m_lower + (uint128_t)rhs) < m_lower),
                         m_lower + (uint128_t)rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t &uint256_t::operator+=(const T &rhs)
+    uint256_t &uint256_t::operator+=(const T &rhs) noexcept
     {
         m_upper = m_upper + ((m_lower + rhs) < m_lower);
         m_lower = m_lower + rhs;
@@ -814,13 +813,13 @@
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t uint256_t::operator-(const T &rhs) const
+    uint256_t uint256_t::operator-(const T &rhs) const noexcept
     {
         return uint256_t(m_upper - ((m_lower - rhs) > m_lower), m_lower - rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t &uint256_t::operator-=(const T &rhs)
+    uint256_t &uint256_t::operator-=(const T &rhs) noexcept
     {
         *this = *this - rhs;
     
@@ -828,13 +827,13 @@
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t uint256_t::operator*(const T &rhs) const
+    uint256_t uint256_t::operator*(const T &rhs) const noexcept
     {
         return *this * uint256_t(rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t &uint256_t::operator*=(const T &rhs)
+    uint256_t &uint256_t::operator*=(const T &rhs) noexcept
     {
         *this = *this * uint256_t(rhs);
 
@@ -877,52 +876,52 @@
     // Arithmetic Operators
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t operator+(const uint128_t &lhs, const uint256_t &rhs);
+    uint256_t operator+(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t operator+(const T &lhs, const uint256_t &rhs)
+    uint256_t operator+(const T &lhs, const uint256_t &rhs) noexcept
     {
         return rhs + lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator+=(uint128_t &lhs, const uint256_t &rhs);
+    uint128_t &operator+=(uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator+=(T &lhs, const uint256_t &rhs)
+    T &operator+=(T &lhs, const uint256_t &rhs) noexcept
     {
         lhs = static_cast<T>(rhs + lhs);
         
         return lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator-(const uint128_t &lhs, const uint256_t &rhs);
+    uint256_t operator-(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t operator-(const T &lhs, const uint256_t &rhs)
+    uint256_t operator-(const T &lhs, const uint256_t &rhs) noexcept
     {
         return -(rhs - lhs);
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator-=(uint128_t &lhs, const uint256_t &rhs);
+    uint128_t &operator-=(uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator-=(T &lhs, const uint256_t &rhs)
+    T &operator-=(T &lhs, const uint256_t &rhs) noexcept
     {
         return lhs = static_cast<T>(-(rhs - lhs));
     }
 //  ----------------------------------------------------------------------------
-    uint256_t operator*(const uint128_t &lhs, const uint256_t &rhs);
+    uint256_t operator*(const uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t operator*(const T &lhs, const uint256_t &rhs)
+    uint256_t operator*(const T &lhs, const uint256_t &rhs) noexcept
     {
         return rhs * lhs;
     }
 //  ----------------------------------------------------------------------------
-    uint128_t &operator*=(uint128_t &lhs, const uint256_t &rhs);
+    uint128_t &operator*=(uint128_t &lhs, const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator*=(T &lhs, const uint256_t &rhs)
+    T &operator*=(T &lhs, const uint256_t &rhs) noexcept
     {
         return lhs = static_cast<T>(rhs * lhs);
     }
@@ -930,7 +929,7 @@
     uint256_t operator/(const uint128_t &lhs, const uint256_t &rhs);
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t operator/(const T &lhs, const uint256_t &rhs)
+    uint256_t operator/(const T &lhs, const uint256_t &rhs) 
     {
         return uint256_t(lhs) / rhs;
     }
@@ -938,7 +937,7 @@
     uint128_t &operator/=(uint128_t &lhs, const uint256_t &rhs);
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    T &operator/=(T &lhs, const uint256_t &rhs)
+    T &operator/=(T &lhs, const uint256_t &rhs) 
     {
         return lhs = static_cast<T>(uint256_t(lhs) / rhs);
     }
@@ -946,7 +945,7 @@
     uint256_t operator%(const uint128_t &lhs, const uint256_t &rhs);
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    uint256_t operator%(const T &lhs, const uint256_t &rhs)
+    uint256_t operator%(const T &lhs, const uint256_t &rhs) 
     {
         return uint256_t(lhs) % rhs;
     }
@@ -968,14 +967,14 @@
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint256_t::operator&&(const T &rhs) const
+    bool uint256_t::operator&&(const T &rhs) const noexcept
     {
         return ((bool)*this && rhs);
     }
 //  ----------------------------------------------------------------------------
     template <std::integral T>
-    bool uint256_t::operator||(const T &rhs) const
-    {
+    bool uint256_t::operator||(const T &rhs) const noexcept
+    { 
         return ((bool)*this || rhs);
     }
 //  ----------------------------------------------------------------------------
