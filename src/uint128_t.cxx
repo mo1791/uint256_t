@@ -1,14 +1,14 @@
-/**
- * @file uint128_t.cxx
- * @author your name (you@domain.com)
- * @brief
- * @version 0.1
- * @date 2022-07-23
- * @copyright Copyright (c) 2022
- * @details An unsigned 128 bit integer type for C++
- */
+/******
+** @file uint128_t.cxx
+** @author your name (you@domain.com)
+** @brief
+** @version 0.1
+** @date 2022-07-23
+** @copyright Copyright (c) 2022
+** @details An unsigned 128 bit integer type for C++
+***********/
 
-#include <uint128_t.hxx>
+#include "source.hxx"
 #include <array>
 
 
@@ -58,7 +58,7 @@
 //  ----------------------------------------------------------------------------
     uint128_t &uint128_t::operator=(uint128_t &&rhs) noexcept
     {
-        if (this != &rhs)
+        if (this != std::addressof(rhs))
         {
             m_upper = std::exchange(rhs.m_upper, 0);
             m_lower = std::exchange(rhs.m_lower, 0);
@@ -197,14 +197,14 @@
         }
         else if (shift < 64)
         {
-            return uint128_t( ( m_upper >> shift ), ( m_upper << (64 - shift) ) + (m_lower >> shift) );
+            return uint128_t( ( m_upper >> shift ),
+                              ( m_upper << (64 - shift) ) + (m_lower >> shift) );
         }
         else if ((128 > shift) && (shift > 64))
         {
             return uint128_t(0, (m_upper >> (shift - 64)));
         }
-        else
-        {
+        else {
             return uint128_0;
         }
     }
@@ -316,7 +316,7 @@
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator!() const noexcept
     { 
-        return !(bool)(m_upper | m_lower);
+        return not (bool)(m_upper | m_lower);
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator&&(const uint128_t &rhs) const noexcept
@@ -353,6 +353,7 @@
         {
             return (m_lower > rhs.m_lower);
         }
+
         return (m_upper > rhs.m_upper);
     }
 //  ----------------------------------------------------------------------------
@@ -484,7 +485,7 @@
 //  ----------------------------------------------------------------------------
     std::pair<uint128_t, uint128_t> uint128_t::divmod(const uint128_t &lhs, const uint128_t &rhs) const
     {
-        // Save some calculations /////////////////////
+        // Save some calculations
         if (rhs == uint128_0)
         {
             throw std::domain_error("Error: division or modulus by 0");
@@ -564,7 +565,7 @@
     uint128_t uint128_t::operator++(int) noexcept
     {
         uint128_t temp(*this);
-        ++*this;
+        ++(*this);
 
         return temp;
     }
@@ -577,7 +578,7 @@
     uint128_t uint128_t::operator--(int) noexcept
     {
         uint128_t temp(*this);
-        --*this;
+        --(*this);
 
         return temp;
     }
@@ -595,7 +596,7 @@
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator-() const noexcept
     {
-        return ~*this + uint128_1;
+        return ~(*this) + uint128_1;
     }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
@@ -631,8 +632,7 @@
                 out++;
             }
         }
-        else
-        {
+        else {
             uint64_t low = m_lower;
             
             while (low)
@@ -663,8 +663,7 @@
         {
             out = std::string("0");
         }
-        else
-        {
+        else {
             std::pair<uint128_t, uint128_t> qr(*this, uint128_0);
             
             do {
@@ -692,6 +691,8 @@
     {
         if ( stream.flags() & stream.oct )
         {
+            if ( stream.flags() & stream.showbase ) stream << "0";
+
             stream << rhs.str(8);
         }
         else if ( stream.flags() & stream.dec )
@@ -700,6 +701,8 @@
         }
         else if ( stream.flags() & stream.hex )
         {
+            if ( stream.flags() & stream.showbase ) stream << "0x";
+
             stream << rhs.str(16);
         }
         
