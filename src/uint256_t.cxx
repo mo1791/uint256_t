@@ -1,12 +1,12 @@
-/**
- * @file uint256_t.cxx
- * @author your name (you@domain.com)
- * @brief
- * @version 0.1
- * @date 2022-07-23
- * @copyright Copyright (c) 2022
- * @details unsigned 256 bit integer type for C++
- */
+/*******
+** @file uint256_t.cxx
+** @author your name (you@domain.com)
+** @brief
+** @version 0.1
+** @date 2022-07-23
+** @copyright Copyright (c) 2022
+** @details unsigned 256 bit integer type for C++
+*************/
 
 #include <uint256_t.hxx>
 #include <array>
@@ -66,7 +66,7 @@
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator=(uint256_t &&rhs) noexcept
     {
-        if (this != &rhs)
+        if (this != std::addressof(rhs))
         {
             m_upper = std::exchange(rhs.m_upper, uint128_0);
             m_lower = std::exchange(rhs.m_lower, uint128_0);
@@ -225,8 +225,7 @@
         {
             return uint256_t(m_lower << (shift - uint128_128), uint128_0);
         } 
-        else 
-        {
+        else {
             return uint256_0;
         }
     }
@@ -542,9 +541,10 @@
         return *this;
     }
 //  ----------------------------------------------------------------------------
-    std::pair<uint256_t, uint256_t> uint256_t::divmod(const uint256_t &lhs, const uint256_t &rhs) const
+    std::pair<uint256_t, uint256_t> uint256_t::divmod(const uint256_t &lhs,
+                                                      const uint256_t &rhs) const
     {
-        // Save some calculations /////////////////////
+        // Save some calculations
         if (rhs == uint256_0)
         {
             throw std::domain_error("Error: division or modulus by 0");
@@ -651,7 +651,7 @@
     uint256_t uint256_t::operator++(int) noexcept
     {
         uint256_t temp(*this);
-        ++*this;
+        ++(*this);
     
         return temp;
     }
@@ -666,7 +666,7 @@
     uint256_t uint256_t::operator--(int) noexcept
     {
         uint256_t temp(*this);
-        --*this;
+        --(*this);
 
         return temp;
     }
@@ -685,7 +685,7 @@
 //  ----------------------------------------------------------------------------
     uint256_t uint256_t::operator-() const noexcept
     {
-        return ~*this + uint256_1;
+        return ~(*this) + uint256_1;
     }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
@@ -722,8 +722,7 @@
                 out++;
             }
         }
-        else
-        {
+        else {
             uint128_t low = m_lower;
            
             while (low)
@@ -761,7 +760,6 @@
             std::pair<uint256_t, uint256_t> qr(*this, uint256_0);
             
             do{
-
                 qr = divmod(qr.first, base);
                 out = "0123456789abcdefghijklmnopqrstuvwxyz"[(uint8_t)qr.second] + out;
             
@@ -1065,6 +1063,8 @@
     {
         if (stream.flags() & stream.oct)
         {
+            if ( stream.flags() & stream.showbase ) stream << "0";
+
             stream << rhs.str(8);
         }
         else if (stream.flags() & stream.dec)
@@ -1073,6 +1073,8 @@
         }
         else if (stream.flags() & stream.hex)
         {
+            if ( stream.flags() & stream.showbase ) stream << "0x";
+            
             stream << rhs.str(16);
         }
         
