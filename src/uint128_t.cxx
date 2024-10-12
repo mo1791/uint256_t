@@ -50,8 +50,8 @@
 //  ----------------------------------------------------------------------------
     uint128_t &uint128_t::operator=(const uint128_t &rhs) noexcept
     {
-        m_upper = rhs.m_upper;
-        m_lower = rhs.m_lower;
+        this->m_upper = rhs.m_upper;
+        this->m_lower = rhs.m_lower;
 
         return *this;
     }
@@ -60,8 +60,8 @@
     {
         if (this != std::addressof(rhs))
         {
-            m_upper = std::exchange(rhs.m_upper, 0);
-            m_lower = std::exchange(rhs.m_lower, 0);
+            this->m_upper = std::exchange(rhs.m_upper, 0);
+            this->m_lower = std::exchange(rhs.m_lower, 0);
         }
 
         return *this;
@@ -74,19 +74,19 @@
     // typecast operator
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint128_t::operator bool()     const noexcept { return (bool)(m_upper | m_lower); }
+    uint128_t::operator bool()     const noexcept { return (bool)(this->m_upper | this->m_lower); }
 //  ----------------------------------------------------------------------------
-    uint128_t::operator uint8_t()  const noexcept { return (uint8_t)m_lower; }
+    uint128_t::operator uint8_t()  const noexcept { return (uint8_t)this->m_lower; }
 //  ----------------------------------------------------------------------------
-    uint128_t::operator uint16_t() const noexcept { return (uint16_t)m_lower; }
+    uint128_t::operator uint16_t() const noexcept { return (uint16_t)this->m_lower; }
 //  ----------------------------------------------------------------------------
-    uint128_t::operator uint32_t() const noexcept { return (uint32_t)m_lower; }
+    uint128_t::operator uint32_t() const noexcept { return (uint32_t)this->m_lower; }
 //  ----------------------------------------------------------------------------
-    uint128_t::operator uint64_t() const noexcept { return (uint64_t)m_lower; }
+    uint128_t::operator uint64_t() const noexcept { return (uint64_t)this->m_lower; }
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator&(const uint128_t &rhs) const noexcept
     {
-        return uint128_t( ( m_upper & rhs.m_upper ), ( m_lower & rhs.m_lower ) );
+        return uint128_t( ( this->m_upper & rhs.m_upper ), ( this->m_lower & rhs.m_lower ) );
     }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
@@ -98,41 +98,41 @@
 //  ----------------------------------------------------------------------------
     uint128_t &uint128_t::operator&=(const uint128_t &rhs) noexcept
     {
-        m_upper &= rhs.m_upper;
-        m_lower &= rhs.m_lower;
+        this->m_upper &= rhs.m_upper;
+        this->m_lower &= rhs.m_lower;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator|(const uint128_t &rhs) const noexcept
     {
-        return uint128_t( ( m_upper | rhs.m_upper ), ( m_lower | rhs.m_lower ) );
+        return uint128_t( ( this->m_upper | rhs.m_upper ), ( this->m_lower | rhs.m_lower ) );
     }
 //  ----------------------------------------------------------------------------
     uint128_t &uint128_t::operator|=(const uint128_t &rhs) noexcept
     {
-        m_upper |= rhs.m_upper;
-        m_lower |= rhs.m_lower;
+        this->m_upper |= rhs.m_upper;
+        this->m_lower |= rhs.m_lower;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator^(const uint128_t &rhs) const noexcept
     {
-        return uint128_t( ( m_upper ^ rhs.m_upper ), ( m_lower ^ rhs.m_lower ) );
+        return uint128_t( ( this->m_upper ^ rhs.m_upper ), ( this->m_lower ^ rhs.m_lower ) );
     }
 //  ----------------------------------------------------------------------------
     uint128_t &uint128_t::operator^=(const uint128_t &rhs) noexcept
     {
-        m_upper ^= rhs.m_upper;
-        m_lower ^= rhs.m_lower;
+        this->m_upper ^= rhs.m_upper;
+        this->m_lower ^= rhs.m_lower;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator~() const noexcept
     { 
-        return uint128_t(~m_upper, ~m_lower);
+        return uint128_t(~this->m_upper, ~this->m_lower);
     }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
@@ -153,7 +153,7 @@
         } 
         else if( shift == 64 )
         {
-            return uint128_t(m_lower, 0);
+            return uint128_t(this->m_lower, 0);
         }
         else if ( shift == 0 )
         {
@@ -161,11 +161,13 @@
         } 
         else if (shift < 64)
         {
-            return uint128_t( ( m_upper << shift ) + ( m_lower >> ( 64 - shift ) ), ( m_lower << shift ) );
+            return uint128_t( 
+                        ( this->m_upper << shift ) + ( this->m_lower >> ( 64 - shift ) ),
+                        ( this->m_lower << shift ) );
         } 
         else if ((128 > shift) && (shift > 64)) 
         {
-            return uint128_t( ( m_lower << (shift - 64) ), 0);
+            return uint128_t( ( this->m_lower << (shift - 64) ), 0);
         } 
         else 
         {
@@ -189,7 +191,7 @@
         }
         else if (shift == 64)
         {
-            return uint128_t(0, m_upper);
+            return uint128_t(0, this->m_upper);
         }
         else if (shift == 0)
         {
@@ -197,12 +199,12 @@
         }
         else if (shift < 64)
         {
-            return uint128_t( ( m_upper >> shift ),
-                              ( m_upper << (64 - shift) ) + (m_lower >> shift) );
+            return uint128_t( ( this->m_upper >> shift ),
+                              ( this->m_upper << (64 - shift) ) + (this->m_lower >> shift) );
         }
         else if ((128 > shift) && (shift > 64))
         {
-            return uint128_t(0, (m_upper >> (shift - 64)));
+            return uint128_t(0, (this->m_upper >> (shift - 64)));
         }
         else {
             return uint128_0;
@@ -316,7 +318,7 @@
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator!() const noexcept
     { 
-        return not (bool)(m_upper | m_lower);
+        return not (bool)(this->m_upper | this->m_lower);
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator&&(const uint128_t &rhs) const noexcept
@@ -331,12 +333,14 @@
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator==(const uint128_t &rhs) const noexcept
     {
-        return ((m_upper == rhs.m_upper) && (m_lower == rhs.m_lower));
+        return  (this->m_upper == rhs.m_upper) &&
+                (this->m_lower == rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator!=(const uint128_t &rhs) const noexcept
     {
-        return ((m_upper != rhs.m_upper) | (m_lower != rhs.m_lower));
+        return  (this->m_upper != rhs.m_upper) |
+                (this->m_lower != rhs.m_lower));
     }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
@@ -349,32 +353,32 @@
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator>(const uint128_t &rhs) const noexcept
     {
-        if (m_upper == rhs.m_upper)
+        if (this->m_upper == rhs.m_upper)
         {
-            return (m_lower > rhs.m_lower);
+            return this->m_lower > rhs.m_lower;
         }
 
-        return (m_upper > rhs.m_upper);
+        return this->m_upper > rhs.m_upper;
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator<(const uint128_t &rhs) const noexcept
     {
-        if (m_upper == rhs.m_upper)
+        if (this->m_upper == rhs.m_upper)
         {
-            return (m_lower < rhs.m_lower);
+            return this->m_lower < rhs.m_lower;
         }
 
-        return (m_upper < rhs.m_upper);
+        return this->m_upper < rhs.m_upper;
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator>=(const uint128_t &rhs) const noexcept
     {
-        return ((*this > rhs) | (*this == rhs));
+        return (*this > rhs) | (*this == rhs);
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator<=(const uint128_t &rhs) const noexcept
     {
-        return ((*this < rhs) | (*this == rhs));
+        return (*this < rhs) | (*this == rhs);
     }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
@@ -387,22 +391,24 @@
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator+(const uint128_t &rhs) const noexcept
     {
-        return uint128_t(m_upper + rhs.m_upper + ((m_lower + rhs.m_lower) < m_lower),
-                        m_lower + rhs.m_lower);
+        return uint128_t(
+                    this->m_upper + rhs.m_upper + ((this->m_lower + rhs.m_lower) < this->m_lower),
+                    this->m_lower + rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
     uint128_t &uint128_t::operator+=(const uint128_t &rhs) noexcept
     {
-        m_upper += rhs.m_upper + ((m_lower + rhs.m_lower) < m_lower);
-        m_lower += rhs.m_lower;
+        this->m_upper += rhs.m_upper + ((this->m_lower + rhs.m_lower) < this->m_lower);
+        this->m_lower += rhs.m_lower;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator-(const uint128_t &rhs) const noexcept
     {
-        return uint128_t(m_upper - rhs.m_upper - ((m_lower - rhs.m_lower) > m_lower),
-                        m_lower - rhs.m_lower);
+        return uint128_t(
+                    this->m_upper - rhs.m_upper - ((this->m_lower - rhs.m_lower) > this->m_lower),
+                    this->m_lower - rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
     uint128_t &uint128_t::operator-=(const uint128_t &rhs) noexcept
@@ -417,10 +423,10 @@
         // split values into 4 32-bit parts
         std::array<uint64_t, 4> top
         { 
-            m_upper >> 32,
-            m_upper & 0xffffffff, 
-            m_lower >> 32,
-            m_lower & 0xffffffff
+            this->m_upper >> 32,
+            this->m_upper & 0xffffffff, 
+            this->m_lower >> 32,
+            this->m_lower & 0xffffffff
         };
         
         std::array<uint64_t, 4> bottom
@@ -473,7 +479,9 @@
         first32   &= 0xffffffff;
 
         // combine components
-        return uint128_t((first32 << 32) | second32, (third32 << 32) | fourth32);
+        return uint128_t(
+                    ( first32 << 32 ) | second32,
+                    ( third32 << 32 ) | fourth32);
     }
 //  ----------------------------------------------------------------------------
     uint128_t &uint128_t::operator*=(const uint128_t &rhs) noexcept
@@ -607,24 +615,18 @@
     // Getter
 //  ----------------------------------------------------------------------------
 //  ---------------------------------------------------------------------------- 
-    const uint64_t &uint128_t::upper() const noexcept
-    {
-        return m_upper;
-    }
+    const uint64_t &uint128_t::upper() const noexcept { return this->m_upper; }
 //  ----------------------------------------------------------------------------
-    const uint64_t &uint128_t::lower() const noexcept
-    {
-        return m_lower;
-    }
+    const uint64_t &uint128_t::lower() const noexcept { return this->m_lower; }
 //  ----------------------------------------------------------------------------
     uint8_t uint128_t::bits() const noexcept
     {
         uint8_t out = 0;
         
-        if (m_upper)
+        if (this->m_upper)
         {
             out         = 64;
-            uint64_t up = m_upper;
+            uint64_t up = this->m_upper;
 
             while (up)
             {
@@ -633,7 +635,7 @@
             }
         }
         else {
-            uint64_t low = m_lower;
+            uint64_t low = this->m_lower;
             
             while (low)
             {

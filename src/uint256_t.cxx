@@ -58,8 +58,8 @@
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator=(const uint256_t &rhs) noexcept
     {
-        m_upper = rhs.m_upper;
-        m_lower = rhs.m_lower;
+        this->m_upper = rhs.m_upper;
+        this->m_lower = rhs.m_lower;
         
         return *this;
     }
@@ -68,8 +68,8 @@
     {
         if (this != std::addressof(rhs))
         {
-            m_upper = std::exchange(rhs.m_upper, uint128_0);
-            m_lower = std::exchange(rhs.m_lower, uint128_0);
+            this->m_upper = std::exchange(rhs.m_upper, uint128_0);
+            this->m_lower = std::exchange(rhs.m_lower, uint128_0);
         }
 
         return *this;
@@ -84,17 +84,17 @@
     // TYPECAST OPERATOR
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t::operator bool() const noexcept { return (bool)(m_upper | m_lower); }
+    uint256_t::operator bool() const noexcept { return (bool)(this->m_upper | this->m_lower); }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint8_t() const noexcept { return (uint8_t)m_lower; }
+    uint256_t::operator uint8_t() const noexcept { return (uint8_t)this->m_lower; }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint16_t() const noexcept { return (uint16_t)m_lower; }
+    uint256_t::operator uint16_t() const noexcept { return (uint16_t)this->m_lower; }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint32_t() const noexcept { return (uint32_t)m_lower; }
+    uint256_t::operator uint32_t() const noexcept { return (uint32_t)this->m_lower; }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint64_t() const noexcept { return (uint64_t)m_lower; }
+    uint256_t::operator uint64_t() const noexcept { return (uint64_t)this->m_lower; }
 //  ----------------------------------------------------------------------------
-    uint256_t::operator uint128_t() const noexcept { return m_lower; }
+    uint256_t::operator uint128_t() const noexcept { return this->m_lower; }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -107,83 +107,83 @@
 //  ----------------------------------------------------------------------------
     uint256_t uint256_t::operator&(const uint128_t &rhs) const noexcept
     {
-        return uint256_t(uint128_0, m_lower & rhs);
+        return uint256_t(uint128_0, this->m_lower & rhs);
     }
 //  ----------------------------------------------------------------------------
     uint256_t uint256_t::operator&(const uint256_t &rhs) const noexcept
     {
-        return uint256_t(m_upper & rhs.m_upper, m_lower & rhs.m_lower);
+        return uint256_t(this->m_upper & rhs.m_upper, this->m_lower & rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator&=(const uint128_t &rhs) noexcept
     {
-        m_upper  = uint128_0;
-        m_lower &= rhs;
+        this->m_upper  = uint128_0;
+        this->m_lower &= rhs;
         
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator&=(const uint256_t &rhs) noexcept
     {
-        m_upper &= rhs.m_upper;
-        m_lower &= rhs.m_lower;
+        this->m_upper &= rhs.m_upper;
+        this->m_lower &= rhs.m_lower;
         
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint256_t uint256_t::operator|(const uint128_t &rhs) const noexcept
     {
-        return uint256_t(m_upper, m_lower | rhs);
+        return uint256_t(this->m_upper, this->m_lower | rhs);
     }
 //  ----------------------------------------------------------------------------
     uint256_t uint256_t::operator|(const uint256_t &rhs) const noexcept
     {
-        return uint256_t(m_upper | rhs.m_upper, m_lower | rhs.m_lower);
+        return uint256_t(this->m_upper | rhs.m_upper, this->m_lower | rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator|=(const uint128_t &rhs) noexcept
     {
-        m_lower |= rhs;
+        this->m_lower |= rhs;
         
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator|=(const uint256_t &rhs) noexcept
     {
-        m_upper |= rhs.m_upper;
-        m_lower |= rhs.m_lower;
+        this->m_upper |= rhs.m_upper;
+        this->m_lower |= rhs.m_lower;
     
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint256_t uint256_t::operator^(const uint128_t &rhs) const noexcept
     {
-        return uint256_t(m_upper, m_lower ^ rhs);
+        return uint256_t(this->m_upper, this->m_lower ^ rhs);
     }
 //  ----------------------------------------------------------------------------
     uint256_t uint256_t::operator^(const uint256_t &rhs) const noexcept
     {
-        return uint256_t(m_upper ^ rhs.m_upper, m_lower ^ rhs.m_lower);
+        return uint256_t(this->m_upper ^ rhs.m_upper, this->m_lower ^ rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator^=(const uint128_t &rhs) noexcept
     {
-        m_lower ^= rhs;
+        this->m_lower ^= rhs;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator^=(const uint256_t &rhs) noexcept
     {
-        m_upper ^= rhs.m_upper;
-        m_lower ^= rhs.m_lower;
+        this->m_upper ^= rhs.m_upper;
+        this->m_lower ^= rhs.m_lower;
     
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint256_t uint256_t::operator~() const noexcept
     { 
-        return uint256_t(~m_upper, ~m_lower);
+        return uint256_t(~this->m_upper, ~this->m_lower);
     }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
@@ -210,7 +210,7 @@
         } 
         else if (shift == uint128_128) 
         {
-            return uint256_t(m_lower, uint128_0);
+            return uint256_t(this->m_lower, uint128_0);
         } 
         else if (shift == uint128_0)
         {
@@ -218,12 +218,13 @@
         } 
         else if (shift < uint128_128)
         {
-            return uint256_t((m_upper << shift) + (m_lower >> (uint128_128 - shift)),
-                            ( m_lower << shift ));
+            return uint256_t(
+                        ( this->m_upper << shift ) + ( this->m_lower >> (uint128_128 - shift)),
+                        ( this->m_lower << shift ));
         }
         else if ((uint128_256 > shift) && (shift > uint128_128))
         {
-            return uint256_t(m_lower << (shift - uint128_128), uint128_0);
+            return uint256_t(this->m_lower << (shift - uint128_128), uint128_0);
         } 
         else {
             return uint256_0;
@@ -257,7 +258,7 @@
         }
         else if (shift == uint128_128)
         {
-            return uint256_t(m_upper);
+            return uint256_t(this->m_upper);
         }
         else if (shift == uint128_0)
         {
@@ -265,12 +266,13 @@
         }
         else if (shift < uint128_128)
         {
-            return uint256_t(m_upper >> shift,
-                            (m_upper << (uint128_128 - shift)) + (m_lower >> shift));
+            return uint256_t(
+                        ( this->m_upper >> shift ),
+                        ( this->m_upper << (uint128_128 - shift) ) + ( this->m_lower >> shift ));
         }
         else if ((uint128_256 > shift) && (shift > uint128_128))
         {
-            return uint256_t(m_upper >> (shift - uint128_128));
+            return uint256_t(this->m_upper >> (shift - uint128_128));
         }
         else {
             return uint256_0;
@@ -338,7 +340,8 @@
 //  ----------------------------------------------------------------------------
     bool uint256_t::operator==(const uint256_t &rhs) const noexcept
     {
-        return ((m_upper == rhs.m_upper) && (m_lower == rhs.m_lower));
+        return  (this->m_upper == rhs.m_upper) &&
+                (this->m_lower == rhs.m_lower));
     }
 //  ----------------------------------------------------------------------------
     bool uint256_t::operator!=(const uint128_t &rhs) const noexcept
@@ -348,7 +351,8 @@
 //  ----------------------------------------------------------------------------
     bool uint256_t::operator!=(const uint256_t &rhs) const noexcept
     {
-        return ((m_upper != rhs.m_upper) | (m_lower != rhs.m_lower));
+        return  (this->m_upper != rhs.m_upper) |
+                (this->m_lower != rhs.m_lower));
     }
 //  ----------------------------------------------------------------------------
     bool uint256_t::operator>(const uint128_t &rhs) const noexcept
@@ -358,12 +362,12 @@
 //  ----------------------------------------------------------------------------
     bool uint256_t::operator>(const uint256_t &rhs) const noexcept
     {
-        if (m_upper == rhs.m_upper)
+        if (this->m_upper == rhs.m_upper)
         {
-            return (m_lower > rhs.m_lower);
+            return this->m_lower > rhs.m_lower;
         }
 
-        if (m_upper > rhs.m_upper)
+        if (this->m_upper > rhs.m_upper)
         {
             return true;
         }
@@ -378,12 +382,12 @@
 //  ----------------------------------------------------------------------------
     bool uint256_t::operator<(const uint256_t &rhs) const noexcept
     {
-        if (m_upper == rhs.m_upper)
+        if (this->m_upper == rhs.m_upper)
         {
-            return (m_lower < rhs.m_lower);
+            return this->m_lower < rhs.m_lower;
         }
 
-        if (m_upper < rhs.m_upper)
+        if (this->m_upper < rhs.m_upper)
         {
             return true;
         }
@@ -428,9 +432,8 @@
     uint256_t uint256_t::operator+(const uint256_t &rhs) const noexcept
     {
         return uint256_t(
-            m_upper + rhs.m_upper +
-                (( (m_lower + rhs.m_lower) < m_lower ) ? uint128_1 : uint128_0 ),
-            m_lower + rhs.m_lower);
+                this->m_upper + rhs.m_upper + ( ( ( this->m_lower + rhs.m_lower ) < this->m_lower ) ? uint128_1 : uint128_0 ),
+                this->m_lower + rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator+=(const uint128_t &rhs) noexcept
@@ -440,8 +443,8 @@
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator+=(const uint256_t &rhs) noexcept
     {
-        m_upper = rhs.m_upper + m_upper + ((m_lower + rhs.m_lower) < m_lower);
-        m_lower = m_lower + rhs.m_lower;
+        this->m_upper = rhs.m_upper + this->m_upper + ((this->m_lower + rhs.m_lower) < this->m_lower);
+        this->m_lower = this->m_lower + rhs.m_lower;
         
         return *this;
     }
@@ -453,8 +456,9 @@
 //  ----------------------------------------------------------------------------
     uint256_t uint256_t::operator-(const uint256_t &rhs) const noexcept
     {
-        return uint256_t(m_upper - rhs.m_upper - ((m_lower - rhs.m_lower) > m_lower),
-                        m_lower - rhs.m_lower);
+        return uint256_t(
+                    this->m_upper - rhs.m_upper - (( this->m_lower - rhs.m_lower ) > this->m_lower),
+                    this->m_lower - rhs.m_lower);
     }
 //  ----------------------------------------------------------------------------
     uint256_t &uint256_t::operator-=(const uint128_t &rhs) noexcept
@@ -479,10 +483,10 @@
         // split values into 4 64-bit parts
         std::array<uint128_t, 4> top 
         {
-            m_upper.upper(),
-            m_upper.lower(),
-            m_lower.upper(),
-            m_lower.lower()
+            this->m_upper.upper(),
+            this->m_upper.lower(),
+            this->m_lower.upper(),
+            this->m_lower.lower()
         };
 
         std::array<uint128_t ,4> bottom
@@ -697,9 +701,9 @@
     // GETTER
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    const uint128_t &uint256_t::upper() const noexcept { return m_upper; }
+    const uint128_t &uint256_t::upper() const noexcept { return this->m_upper; }
 //  ----------------------------------------------------------------------------
-    const uint128_t &uint256_t::lower() const noexcept { return m_lower; }
+    const uint128_t &uint256_t::lower() const noexcept { return this->m_lower; }
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -711,10 +715,10 @@
     uint16_t uint256_t::bits() const noexcept
     {
         uint16_t out = 0;
-        if (m_upper)
+        if (this->m_upper)
         {
             out          = 128;
-            uint128_t up = m_upper;
+            uint128_t up = this->m_upper;
 
             while (up)
             {
@@ -723,7 +727,7 @@
             }
         }
         else {
-            uint128_t low = m_lower;
+            uint128_t low = this->m_lower;
            
             while (low)
             {

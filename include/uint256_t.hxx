@@ -74,9 +74,9 @@ public:
     // Assignment Operator
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint256_t &operator=(const uint256_t &rhs) noexcept;
+    uint256_t& operator=(const uint256_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint256_t &operator=(uint256_t &&rhs) noexcept;        
+    uint256_t& operator=(uint256_t &&rhs) noexcept;        
 //  ----------------------------------------------------------------------------
     uint256_t& operator=(const std::integral auto &rhs) noexcept;
 //  ----------------------------------------------------------------------------
@@ -409,7 +409,7 @@ public:
     // Get string representation of value
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    std::string str(uint8_t base = 10, const unsigned int &len = 0) const;
+    std::string str(uint8_t base = 10U, const unsigned int &len = 0U) const;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 };
@@ -468,8 +468,8 @@ public:
 
     uint256_t& uint256_t::operator=(const std::integral auto &rhs) noexcept
     {
-        m_upper = uint128_0;
-        m_lower = rhs;
+        this->m_upper = uint128_0;
+        this->m_lower = rhs;
 
         return *this;
     }
@@ -485,14 +485,14 @@ public:
 
     uint256_t uint256_t::operator&(const std::integral auto &rhs) const noexcept
     {
-        return uint256_t(uint128_0, m_lower & (uint128_t)rhs);
+        return uint256_t(uint128_0, this->m_lower & (uint128_t)rhs);
     }
 //  ----------------------------------------------------------------------------
 
     uint256_t &uint256_t::operator&=(const std::integral auto &rhs) noexcept
     {
-        m_upper = uint128_0;
-        m_lower &= rhs;
+        this->m_upper = uint128_0;
+        this->m_lower &= rhs;
         
         return *this;
     }
@@ -500,13 +500,13 @@ public:
 
     uint256_t uint256_t::operator|(const std::integral auto &rhs) const noexcept
     {
-        return uint256_t(m_upper, m_lower | uint128_t(rhs));
+        return uint256_t(this->m_upper, this->m_lower | uint128_t(rhs));
     }
 //  ----------------------------------------------------------------------------
 
     uint256_t &uint256_t::operator|=(const std::integral auto &rhs) noexcept
     {
-        m_lower |= (uint128_t)rhs;
+        this->m_lower |= (uint128_t)rhs;
         
         return *this;
     }
@@ -514,13 +514,13 @@ public:
 
     uint256_t uint256_t::operator^(const std::integral auto &rhs) const noexcept
     {
-        return uint256_t(m_upper, m_lower ^ (uint128_t)rhs);
+        return uint256_t(this->m_upper, this->m_lower ^ (uint128_t)rhs);
     }
 //  ----------------------------------------------------------------------------
 
     uint256_t &uint256_t::operator^=(const std::integral auto &rhs) noexcept
     {
-        m_lower ^= (uint128_t)rhs;
+        this->m_lower ^= (uint128_t)rhs;
         
         return *this;
     }
@@ -797,15 +797,16 @@ public:
 
     uint256_t uint256_t::operator+(const std::integral auto &rhs) const noexcept
     {
-        return uint256_t(m_upper + ((m_lower + (uint128_t)rhs) < m_lower),
-                        m_lower + (uint128_t)rhs);
+        return uint256_t(
+                    this->m_upper + ((this->m_lower + (uint128_t)rhs) < this->m_lower),
+                    this->m_lower + (uint128_t)rhs);
     }
 //  ----------------------------------------------------------------------------
 
     uint256_t &uint256_t::operator+=(const std::integral auto &rhs) noexcept
     {
-        m_upper = m_upper + ((m_lower + rhs) < m_lower);
-        m_lower = m_lower + rhs;
+        this->m_upper = this->m_upper + ((this->m_lower + rhs) < this->m_lower);
+        this->m_lower = this->m_lower + rhs;
 
         return *this;
     }
@@ -813,7 +814,9 @@ public:
 
     uint256_t uint256_t::operator-(const std::integral auto &rhs) const noexcept
     {
-        return uint256_t(m_upper - ((m_lower - rhs) > m_lower), m_lower - rhs);
+        return uint256_t(
+                    this->m_upper - ((this->m_lower - rhs) > this->m_lower),
+                    this->m_lower - rhs);
     }
 //  ----------------------------------------------------------------------------
 

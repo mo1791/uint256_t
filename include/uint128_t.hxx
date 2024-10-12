@@ -74,11 +74,11 @@ public:
     // Assignment Operator
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-    uint128_t &operator=(const uint128_t &rhs) noexcept;
+    uint128_t& operator=(const uint128_t &rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator=(uint128_t &&rhs) noexcept;
+    uint128_t& operator=(uint128_t &&rhs) noexcept;
 //  ----------------------------------------------------------------------------
-    uint128_t &operator=(const std::integral auto &rhs) noexcept;
+    uint128_t& operator=(const std::integral auto &rhs) noexcept;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -320,7 +320,7 @@ public:
     // Get string representation of value
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
-   	std::string str(uint8_t base = 10, const unsigned int &len = 0) const;
+   	std::string str(uint8_t base = 10U, const unsigned int &len = 0U) const;
 //  ----------------------------------------------------------------------------
 //  ----------------------------------------------------------------------------
 
@@ -359,8 +359,8 @@ public:
 //  ----------------------------------------------------------------------------
     uint128_t& uint128_t::operator=(const std::integral auto &rhs) noexcept
     {
-        m_upper = 0;
-        m_lower = rhs;
+        this->m_upper = 0;
+        this->m_lower = rhs;
         
         return *this;
     }
@@ -374,37 +374,37 @@ public:
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator&(const std::integral auto &rhs) const noexcept
     {
-        return uint128_t(0, m_lower & (uint64_t)rhs);
+        return uint128_t(0, this->m_lower & (uint64_t)rhs);
     }
 //  ----------------------------------------------------------------------------
     uint128_t& uint128_t::operator&=(const std::integral auto &rhs) noexcept
     {
-        m_upper  = 0;
-        m_lower &= rhs;
+        this->m_upper  = 0;
+        this->m_lower &= rhs;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator|(const std::integral auto &rhs) const noexcept
     {
-        return uint128_t( m_upper, ( m_lower | (uint64_t)rhs ) );
+        return uint128_t( this->m_upper, ( this->m_lower | (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     uint128_t& uint128_t::operator|=(const std::integral auto &rhs) noexcept
     {
-        m_lower |= (uint64_t)rhs;
+        this->m_lower |= (uint64_t)rhs;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator^(const std::integral auto &rhs) const noexcept
     {
-        return uint128_t( m_upper, ( m_lower ^ (uint64_t)rhs ) );
+        return uint128_t( this->m_upper, ( this->m_lower ^ (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     uint128_t& uint128_t::operator^=(const std::integral auto &rhs) noexcept
     {
-        m_lower ^= (uint64_t)rhs;
+        this->m_lower ^= (uint64_t)rhs;
 
         return *this;
     }
@@ -469,22 +469,22 @@ public:
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator==(const std::integral auto &rhs) const noexcept
     {
-        return ( not m_upper && ( m_lower == (uint64_t)rhs ) );
+        return ( not this->m_upper && ( this->m_lower == (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator!=(const std::integral auto &rhs) const noexcept
     {
-        return ( m_upper | ( m_lower != (uint64_t)rhs ) );
+        return ( this->m_upper | ( this->m_lower != (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator>(const std::integral auto &rhs) const noexcept
     {
-        return ( m_upper || ( m_lower > (uint64_t)rhs ) );
+        return ( this->m_upper || ( this->m_lower > (uint64_t)rhs ) );
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator<(const std::integral auto &rhs) const noexcept
     {
-        return ( not m_upper ) ? ( m_lower < (uint64_t)rhs ) : false;
+        return ( not this->m_upper ) ? ( this->m_lower < (uint64_t)rhs ) : false;
     }
 //  ----------------------------------------------------------------------------
     bool uint128_t::operator>=(const std::integral auto &rhs) const noexcept
@@ -507,22 +507,24 @@ public:
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator+(const std::integral auto &rhs) const noexcept
     {
-        return uint128_t( m_upper + ( ( m_lower + (uint64_t)rhs ) < m_lower ),
-                         ( m_lower + (uint64_t)rhs ) );
+        return uint128_t( 
+                    this->m_upper + ( ( this->m_lower + (uint64_t)rhs ) < this->m_lower ),
+                    this->m_lower + (uint64_t)rhs );
     }
 //  ----------------------------------------------------------------------------
     uint128_t& uint128_t::operator+=(const std::integral auto &rhs) noexcept
     {
-        m_upper = m_upper + ( ( m_lower + rhs ) < m_lower );
-        m_lower = m_lower + rhs;
+        this->m_upper = this->m_upper + ( ( this->m_lower + rhs ) < this->m_lower );
+        this->m_lower = this->m_lower + rhs;
 
         return *this;
     }
 //  ----------------------------------------------------------------------------
     uint128_t uint128_t::operator-(const std::integral auto &rhs) const noexcept
     {
-        return uint128_t((uint64_t)(m_upper - ((m_lower - rhs) > m_lower)),
-                         (uint64_t)(m_lower - rhs));
+        return uint128_t(
+                    (uint64_t)(this->m_upper - ((this->m_lower - rhs) > this->m_lower)),
+                    (uint64_t)(this->m_lower - rhs));
     }
 //  ----------------------------------------------------------------------------
     uint128_t& uint128_t::operator-=(const std::integral auto &rhs) noexcept
